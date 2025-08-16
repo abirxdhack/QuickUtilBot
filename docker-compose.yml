@@ -1,0 +1,10 @@
+services:
+  quickutilbot:
+    build: .
+    container_name: quickutilbot
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      - .:/app

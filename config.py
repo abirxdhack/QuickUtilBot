@@ -62,7 +62,7 @@ IMGAI_SIZE_LIMIT = get_env_or_default("IMGAI_SIZE_LIMIT", 5242880, int)
 MAX_TXT_SIZE = get_env_or_default("MAX_TXT_SIZE", 15728640, int)
 MAX_VIDEO_SIZE = get_env_or_default("MAX_VIDEO_SIZE", 2147483648, int)
 
-YT_COOKIES_PATH = get_env_or_default("YT_COOKIES_PATH", "./cookies/ISmartToolBot.txt")
+YT_COOKIES_PATH = get_env_or_default("YT_COOKIES_PATH", "./cookies/QuickUtilBot.txt")
 
 VIDEO_RESOLUTION = get_env_or_default("VIDEO_RESOLUTION", "1280x720", lambda x: tuple(map(int, x.split('x'))))
 

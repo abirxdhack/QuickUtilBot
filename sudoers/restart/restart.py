@@ -1,3 +1,5 @@
+#Copyright @ISmartCoder
+#Updates Channel t.me/TheSmartDev
 import os
 import shutil
 import asyncio
@@ -242,3 +244,4 @@ def setup_restart_handler(app: TelegramClient):
                 logger.error(f"Failed to update error stop message: {msg_e}")
             await asyncio.sleep(2)
             os._exit(0)
+

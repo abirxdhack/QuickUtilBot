@@ -1,3 +1,5 @@
+#Copyright @ISmartCoder
+#Updates Channel t.me/TheSmartDev
 import asyncio
 import aiohttp
 from telethon import TelegramClient, events
@@ -10,7 +12,6 @@ import pycountry
 import re
 
 async def get_single_bin_info(bin, client, event):
-    """Renamed to avoid conflict with mbin.py"""
     headers = {'x-api-key': BIN_KEY}
     try:
         async with aiohttp.ClientSession() as session:
@@ -43,7 +44,6 @@ def get_flag(country_code, client=None, event=None):
         return "Unknown", "🚨"
 
 def setup_bin_handler(app: TelegramClient):
-    """Fixed handler setup with proper pattern matching"""
     
     @app.on(events.NewMessage(pattern=f'^{COMMAND_PREFIX}bin(?:\\s+(.+))?$'))
     async def bin_handler(event):
@@ -58,7 +58,7 @@ def setup_bin_handler(app: TelegramClient):
         
         LOGGER.info(f"Received /bin command from user: {user_id}")
         
-        # Get the BIN from command arguments
+  
         args = event.pattern_match.group(1)
         if not args:
             await event.respond(
@@ -68,7 +68,7 @@ def setup_bin_handler(app: TelegramClient):
             )
             return
         
-        # Extract digits from input
+      
         bin_digits = re.sub(r'[^0-9]', '', args.strip())
         if not bin_digits or len(bin_digits) < 6:
             await event.respond(
@@ -78,23 +78,22 @@ def setup_bin_handler(app: TelegramClient):
             )
             return
         
-        # Use first 6 digits for API call
+        
         clean_bin_for_api = bin_digits[:6]
         
-        # Show progress message
+        
         progress_message = await event.respond(
             "**Fetching Bin Details...**",
             parse_mode='md',
             buttons=ReplyInlineMarkup([KeyboardButtonRow([Button.url("Join For Updates", UPDATE_CHANNEL_URL)])])
         )
         
-        # Fetch BIN info
+       
         bin_info = await get_single_bin_info(clean_bin_for_api, event.client, event)
         
-        # Delete progress message
+        
         await event.client.delete_messages(event.chat_id, progress_message)
         
-        # Check if API call was successful
         if not bin_info or bin_info.get("Status") != "SUCCESS":
             await event.respond(
                 "**Invalid Bin Provided ❌**",
@@ -112,20 +111,20 @@ def setup_bin_handler(app: TelegramClient):
             )
             return
         
-        # Extract information
+       
         bank = bin_info.get("Issuer", "Unknown")
         country_name = bin_info["Country"].get("Name", "Unknown")
         card_type = bin_info.get("Type", "Unknown")
         card_scheme = bin_info.get("Scheme", "Unknown")
         country_code = bin_info["Country"].get("A2", "")
         
-        # Get flag and country name
+        
         if country_code:
             country_name, flag_emoji = get_flag(country_code, event.client, event)
         else:
             country_name, flag_emoji = "Unknown", "🚨"
         
-        # Format response
+        
         bank_text = bank.upper() if bank != "Unknown" else "Unknown"
         bin_info_text = f"{card_scheme.upper()} - {card_type.upper()}"
         
@@ -140,11 +139,12 @@ def setup_bin_handler(app: TelegramClient):
             f"**🔍 Smart BIN Checker → Activated ✅**"
         )
         
-        # Send response
+       
         await event.respond(
             response_text,
             parse_mode='md',
             buttons=ReplyInlineMarkup([KeyboardButtonRow([Button.url("Join For Updates", UPDATE_CHANNEL_URL)])])
         )
         
+
         LOGGER.info(f"BIN check completed for {clean_bin_for_api} by user {user_id}")

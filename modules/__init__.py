@@ -1,3 +1,5 @@
+#Copyright @ISmartCoder
+#Updates Channel t.me/TheSmartDev
 from .aixutils.ai import setup_ai_handler
 from .aixutils.dep import setup_dep_handler
 from .aixutils.gemi import setup_gem_handler
@@ -28,3 +30,4 @@ def setup_modules_handlers(app):
     setup_topbin_handler(app)
     setup_gen_handler(app)
     setup_bin_handler(app)
+

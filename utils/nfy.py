@@ -2,7 +2,7 @@ import traceback
 from datetime import datetime
 from typing import Optional, Union
 from telethon import TelegramClient, events
-from telethon.tl.types import InputPeerUser, InputPeerChat, InputPeerChannel
+from telethon.tl.types import InputPeerUser, InputPeerChat, InputPeerChannel, KeyboardButtonUserProfile
 from telethon.tl.custom import Button
 from config import OWNER_ID, DEVELOPER_USER_ID, LOG_CHANNEL_ID, UPDATE_CHANNEL_URL
 from .logging_setup import LOGGER
@@ -97,7 +97,10 @@ async def notify_admin(client: TelegramClient, command: str, error: Union[Except
         )
         keyboard_buttons = []
         if user_info['id'] != "N/A":
-            keyboard_buttons.append([Button.url("👤 View Profile", f"tg://user?id={user_info['id']}"), Button.url("🛠 Dev", f"tg://user?id={DEVELOPER_USER_ID}")])
+            keyboard_buttons.append([
+                KeyboardButtonUserProfile(text="👤 View Profile", user_id=int(user_info['id'])),
+                KeyboardButtonUserProfile(text="🛠 Dev", user_id=int(DEVELOPER_USER_ID))
+            ])
         keyboard_buttons.append([Button.inline("📄 View Traceback", f"viewtrcbc{error_id}$".encode())])
         await client.send_message(OWNER_ID, error_report, parse_mode='html', buttons=keyboard_buttons, link_preview=False, silent=(error_level == "WARNING"))
         if is_member and channel_id:
@@ -119,7 +122,7 @@ async def notify_admin(client: TelegramClient, command: str, error: Union[Except
     except Exception as e:
         LOGGER.error(f"Failed to send admin notification: {e}")
         LOGGER.error(traceback.format_exc())
-def setup_nfy_handler(app: TelegramClient):
+async def setup_nfy_handler(app: TelegramClient):
     @app.on(events.CallbackQuery(pattern=b"^viewtrcbc.*\$$"))
     async def handle_traceback_callback(client: TelegramClient, callback_query):
         try:
@@ -184,7 +187,10 @@ def setup_nfy_handler(app: TelegramClient):
             )
             keyboard_buttons = []
             if data['user_info']['id'] != "N/A":
-                keyboard_buttons.append([Button.url("👤 View Profile", f"tg://user?id={data['user_info']['id']}"), Button.url("🛠 Dev", f"tg://user?id={DEVELOPER_USER_ID}")])
+                keyboard_buttons.append([
+                    KeyboardButtonUserProfile(text="👤 View Profile", user_id=int(data['user_info']['id'])),
+                    KeyboardButtonUserProfile(text="🛠 Dev", user_id=int(DEVELOPER_USER_ID))
+                ])
             keyboard_buttons.append([Button.inline("📄 View Traceback", f"viewtrcbc{error_id}$".encode())])
             await callback_query.message.edit_message(error_report, parse_mode='html', buttons=keyboard_buttons, link_preview=False)
             await callback_query.answer("Summary Loaded Successful ✅!")

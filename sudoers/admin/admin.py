@@ -413,4 +413,3 @@ def setup_admin_handler(app: TelegramClient) -> None:
         elif event.user_kicked or event.user_left:
             await group_removed_handler(event)
     
-    LOGGER.info("Admin handlers setup completed for Telethon client")

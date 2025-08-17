@@ -1,3 +1,5 @@
+#Copyright @ISmartCoder
+#Updates Channel t.me/TheSmartDev
 from telethon import TelegramClient
 from telethon.sessions import StringSession
 from utils import LOGGER

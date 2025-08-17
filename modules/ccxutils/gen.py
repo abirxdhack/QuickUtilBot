@@ -1,3 +1,5 @@
+#Copyright @ISmartCoder
+#Updates Channel t.me/TheSmartDev
 import re
 import os
 import random
@@ -131,22 +133,21 @@ def parse_input(user_input):
     if not user_input:
         return None, None, None, None, None
     
-    # Handle direct BIN + amount format (e.g., "515462 2000000")
     input_parts = user_input.strip().split()
     if len(input_parts) == 2:
         potential_bin = input_parts[0]
         potential_amount = input_parts[1]
         
-        # Check if first part is a BIN (6-16 digits) and second part is amount
+        
         if potential_bin.isdigit() and 6 <= len(potential_bin) <= 16 and potential_amount.isdigit():
             bin = potential_bin
             amount = int(potential_amount)
             return bin, month, year, cvv, amount
     
-    # Handle amount at the end for other formats
+    
     if len(input_parts) > 1 and input_parts[-1].isdigit():
         potential_amount = int(input_parts[-1])
-        if 1 <= potential_amount <= 999999:  # Increased range to catch large amounts
+        if 1 <= potential_amount <= 999999:  
             amount = potential_amount
             user_input = ' '.join(input_parts[:-1])
     
@@ -229,10 +230,10 @@ def contains_bin_pattern(text):
 
 def setup_gen_handler(client: TelegramClient):
     
-    # Main /gen command handler
+    
     @client.on(events.NewMessage(pattern=f'^({"|".join(re.escape(prefix) for prefix in COMMAND_PREFIX)})gen'))
     async def generate_handler(event):
-        # Check if message is in private chat or group
+       
         if not (event.is_private or event.is_group):
             return
             
@@ -248,7 +249,7 @@ def setup_gen_handler(client: TelegramClient):
             await client.send_message(event.chat_id, BAN_REPLY)
             return
         
-        # Handle reply messages
+       
         if event.is_reply:
             reply_msg = await event.get_reply_message()
             if reply_msg.text:
@@ -348,10 +349,10 @@ def setup_gen_handler(client: TelegramClient):
                 if os.path.exists(file_name):
                     os.remove(file_name)
     
-    # Auto-generate handler for replies with BIN patterns
+  
     @client.on(events.NewMessage())
     async def auto_generate_handler(event):
-        # Check if message is in private chat or group
+       
         if not (event.is_private or event.is_group):
             return
             
@@ -460,7 +461,7 @@ def setup_gen_handler(client: TelegramClient):
                 if os.path.exists(file_name):
                     os.remove(file_name)
     
-    # Callback query handler for regenerate button
+    
     @client.on(events.CallbackQuery(pattern=b'regenerate'))
     async def regenerate_callback(event):
         user_id = None
@@ -471,7 +472,7 @@ def setup_gen_handler(client: TelegramClient):
             if event.sender.last_name:
                 user_full_name += f" {event.sender.last_name}"
         
-        # Decode callback data
+       
         callback_data = event.data.decode('utf-8')
         data_parts = callback_data.split('|')
         
@@ -523,4 +524,5 @@ def setup_gen_handler(client: TelegramClient):
         callback_data_new = f"regenerate|{bin.replace(' ', '_')}|{month if month else 'xx'}|{year if year else 'xx'}|{cvv if cvv else ('xxxx' if is_amex_bin(bin) else 'xxx')}|{amount}|{user_id if user_id else '0'}"
         
         buttons = [[Button.inline("Re-Generate", callback_data_new.encode())]]
+
         await event.edit(response_text, parse_mode='markdown', buttons=buttons)

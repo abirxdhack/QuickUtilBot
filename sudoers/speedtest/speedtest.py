@@ -1,3 +1,5 @@
+#Copyright @ISmartCoder
+#Updates Channel t.me/TheSmartDev
 import asyncio
 import subprocess
 import json
@@ -91,3 +93,4 @@ def setup_speed_handler(app: TelegramClient):
             parse_mode='html'
         )
         asyncio.create_task(run_speedtest_task(event.client, event.chat_id, status_message))
+

@@ -2,13 +2,13 @@ import asyncio
 import subprocess
 import json
 from concurrent.futures import ThreadPoolExecutor
-from pyrogram import Client, filters
-from pyrogram.handlers import MessageHandler
-from pyrogram.enums import ParseMode, ChatType
-from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
+from telethon import TelegramClient, events
+from telethon.tl.custom import Button
 from config import OWNER_ID, COMMAND_PREFIX, UPDATE_CHANNEL_URL
 from core import auth_admins
 from utils import LOGGER
+
+logger = LOGGER
 
 def speed_convert(size: float, is_mbps: bool = False) -> str:
     if is_mbps:
@@ -40,22 +40,26 @@ def run_speedtest():
         data = json.loads(result.stdout)
         return data
     except Exception as e:
-        LOGGER.error(f"Speedtest error: {e}")
+        logger.error(f"Speedtest error: {e}")
         return {"error": str(e)}
 
-async def run_speedtest_task(client: Client, chat_id: int, status_message: Message):
+async def run_speedtest_task(client: TelegramClient, chat_id: int, status_message):
     with ThreadPoolExecutor() as pool:
         try:
             result = await asyncio.get_running_loop().run_in_executor(pool, run_speedtest)
         except Exception as e:
-            LOGGER.error(f"Error running speedtest task: {e}")
-            await status_message.edit_text("<b>Speed Test API Dead ❌ </b>", parse_mode=ParseMode.HTML)
+            logger.error(f"Error running speedtest task: {e}")
+            await status_message.edit(
+                text="<b>Speed Test API Dead ❌ </b>",
+                parse_mode='html'
+            )
             return
-
     if "error" in result:
-        await status_message.edit_text(f"<b>Speed Test Failed ❌ </b>", parse_mode=ParseMode.HTML)
+        await status_message.edit(
+            text="<b>Speed Test Failed ❌ </b>",
+            parse_mode='html'
+        )
         return
-
     response_text = (
         "<b>Smart Speedtest Check → Successful ✅</b>\n"
         "<b>━━━━━━━━━━━━━━━━━</b>\n"
@@ -66,36 +70,24 @@ async def run_speedtest_task(client: Client, chat_id: int, status_message: Messa
         "<b>━━━━━━━━━━━━━━━━━</b>\n"
         "<b>Smart SpeedTester → Activated ✅</b>"
     )
-
-    keyboard = InlineKeyboardMarkup([
-        [InlineKeyboardButton("Join For Updates", url=UPDATE_CHANNEL_URL)]
-    ])
-
-    await status_message.edit_text(
+    await status_message.edit(
         text=response_text,
-        parse_mode=ParseMode.HTML,
-        reply_markup=keyboard
+        parse_mode='html',
+        buttons=[[Button.url("Join For Updates", UPDATE_CHANNEL_URL)]],
+        link_preview=False
     )
 
-async def speedtest_handler(client: Client, message: Message):
-    user_id = message.from_user.id
-    auth_admins_data = await auth_admins.find({}, {"user_id": 1, "_id": 0}).to_list(None)
-    AUTH_ADMIN_IDS = [admin["user_id"] for admin in auth_admins_data]
-    
-    # Silently ignore non-admin and non-owner users
-    if user_id != OWNER_ID and user_id not in AUTH_ADMIN_IDS:
-        return
-
-    status_message = await client.send_message(
-        chat_id=message.chat.id,
-        text="<b>Processing SpeedTest Please Wait....</b>",
-        parse_mode=ParseMode.HTML
-    )
-
-    asyncio.create_task(run_speedtest_task(client, message.chat.id, status_message))
-
-def setup_speed_handler(app: Client):
-    app.add_handler(MessageHandler(
-        speedtest_handler,
-        filters.command("speedtest", prefixes=COMMAND_PREFIX) & (filters.private | filters.group)
-    ))
+def setup_speed_handler(app: TelegramClient):
+    @app.on(events.NewMessage(pattern=f'({"|".join(COMMAND_PREFIX)})speedtest$'))
+    async def speedtest_handler(event):
+        user_id = event.sender_id
+        auth_admins_data = await auth_admins.find({}, {"user_id": 1, "_id": 0}).to_list(None)
+        AUTH_ADMIN_IDS = [admin["user_id"] for admin in auth_admins_data]
+        if user_id != OWNER_ID and user_id not in AUTH_ADMIN_IDS:
+            return
+        status_message = await event.client.send_message(
+            entity=event.chat_id,
+            message="<b>Processing SpeedTest Please Wait....</b>",
+            parse_mode='html'
+        )
+        asyncio.create_task(run_speedtest_task(event.client, event.chat_id, status_message))

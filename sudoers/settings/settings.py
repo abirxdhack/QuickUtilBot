@@ -1,3 +1,5 @@
+#Copyright @ISmartCoder
+#Updates Channel t.me/TheSmartDev
 import asyncio
 import os
 from dotenv import load_dotenv
@@ -234,3 +236,4 @@ def setup_settings_handler(app: TelegramClient):
         )
         await event.answer()
         logger.info(f"User_id {user_id} closed settings menu")
+

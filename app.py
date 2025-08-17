@@ -1,3 +1,5 @@
+#Copyright @ISmartCoder
+#Updates Channel t.me/TheSmartDev
 from telethon import TelegramClient
 from utils import LOGGER
 from config import (

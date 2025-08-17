@@ -1,3 +1,5 @@
+#Copyright @ISmartCoder
+#Updates Channel t.me/TheSmartDev
 import aiohttp
 from telethon import TelegramClient, events
 from config import OPENAI_API_KEY, COMMAND_PREFIX, BAN_REPLY
@@ -73,4 +75,5 @@ def setup_gpt_handlers(app: TelegramClient):
         
         except Exception as e:
             await event.client.edit_message(loading_message, "**Sorry Chat Gpt 3.5 API Dead**", parse_mode='md')
+
             await notify_admin(event.client, "/gpt", e, event)

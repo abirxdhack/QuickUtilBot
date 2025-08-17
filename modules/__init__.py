@@ -20,6 +20,8 @@ from .cryptxutils.cryptx import setup_coin_handler
 from .cryptxutils.p2p import setup_p2p_handler
 from .cryptxutils.token import setup_crypto_handler
 from .decxutils.dutilz import setup_decoders_handler
+from .fakexutils.fake import setup_fake_handler
+from .gitxutils.git import setup_git_handler
 
 def setup_modules_handlers(app):
     setup_ai_handler(app)
@@ -41,3 +43,5 @@ def setup_modules_handlers(app):
     setup_p2p_handler(app)
     setup_crypto_handler(app)
     setup_decoders_handler(app)
+    setup_fake_handler(app)
+    setup_git_handler(app)

@@ -22,6 +22,10 @@ from .cryptxutils.token import setup_crypto_handler
 from .decxutils.dutilz import setup_decoders_handler
 from .fakexutils.fake import setup_fake_handler
 from .gitxutils.git import setup_git_handler
+from .hlpxutils.help import setup_help_handler
+from .hlpxutils.tpusers import setup_tp_handler
+from .privxutils.privacy import setup_privacy_handler
+from .infoxutils.info import setup_info_handler
 
 def setup_modules_handlers(app):
     setup_ai_handler(app)
@@ -45,3 +49,7 @@ def setup_modules_handlers(app):
     setup_decoders_handler(app)
     setup_fake_handler(app)
     setup_git_handler(app)
+    setup_help_handler(app)
+    setup_tp_handler(app)
+    setup_privacy_handler(app)
+    setup_info_handler(app)

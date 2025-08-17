@@ -1,3 +1,5 @@
+#Copyright @ISmartCoder
+#Updates Channel t.me/TheSmartDev
 from misc import handle_callback_query
 from telethon import events
 from telethon.tl.types import UpdateShortMessage, UpdateNewMessage

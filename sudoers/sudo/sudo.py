@@ -1,9 +1,12 @@
 import asyncio
+import traceback
 from datetime import datetime
 from telethon import TelegramClient, events
 from telethon.tl.custom import Button
 from telethon.tl.types import KeyboardButtonUserProfile
-from telethon.errors import UserIdInvalidError, UsernameInvalidError, PeerIdInvalidError
+from telethon.types import ReplyInlineMarkup, KeyboardButtonRow, InputKeyboardButtonUserProfile
+from telethon.utils import get_display_name
+from telethon.errors import UserIdInvalidError, UsernameInvalidError, PeerIdInvalidError, FloodWaitError
 from config import OWNER_ID, COMMAND_PREFIX
 from core import auth_admins
 from utils import LOGGER
@@ -26,7 +29,7 @@ def setup_sudo_handler(app: TelegramClient):
                 "auth_by": admin.get("auth_by", "Unknown")
             } for admin in admins}
         except Exception as e:
-            logger.error(f"Error fetching auth admins: {e}")
+            logger.error(f"Error fetching auth admins: {e}\n{traceback.format_exc()}")
             return {}
 
     async def add_auth_admin(user_id: int, title: str, username: str, full_name: str, auth_by: str):
@@ -48,7 +51,7 @@ def setup_sudo_handler(app: TelegramClient):
             logger.info(f"Added/Updated admin {user_id} with title {title}")
             return True
         except Exception as e:
-            logger.error(f"Error adding/updating admin {user_id}: {e}")
+            logger.error(f"Error adding/updating admin {user_id}: {e}\n{traceback.format_exc()}")
             return False
 
     async def remove_auth_admin(user_id: int):
@@ -61,24 +64,33 @@ def setup_sudo_handler(app: TelegramClient):
                 logger.info(f"Admin {user_id} not found for removal")
                 return False
         except Exception as e:
-            logger.error(f"Error removing admin {user_id}: {e}")
+            logger.error(f"Error removing admin {user_id}: {e}\n{traceback.format_exc()}")
             return False
 
-    async def resolve_user(client: TelegramClient, identifier: str):
+    async def resolve_user(client: TelegramClient, identifier: str, event):
+        logger.info(f"Attempting to resolve user: {identifier}")
+        if not identifier:
+            await event.respond(
+                message="**Invalid user identifier provided ❌**",
+                parse_mode='markdown'
+            )
+            logger.error("No identifier provided for user resolution")
+            return None, None, None
         try:
             if identifier.startswith("@"):
                 user = await client.get_entity(identifier)
-                full_name = f"{user.first_name} {getattr(user, 'last_name', '')}".strip()
-                username = f"@{user.username}" if user.username else "None"
-                return user.id, full_name, username
             else:
-                user_id = int(identifier)
-                user = await client.get_entity(user_id)
-                full_name = f"{user.first_name} {getattr(user, 'last_name', '')}".strip()
-                username = f"@{user.username}" if user.username else "None"
-                return user_id, full_name, username
-        except (UserIdInvalidError, UsernameInvalidError, PeerIdInvalidError, ValueError) as e:
-            logger.error(f"Error resolving user {identifier}: {e}")
+                user = await client.get_entity(int(identifier))
+            full_name = f"{user.first_name} {getattr(user, 'last_name', '')}".strip()
+            username = f"@{user.username}" if user.username else "None"
+            logger.info(f"Resolved user {identifier} to ID {user.id}")
+            return user.id, full_name, username
+        except (UserIdInvalidError, UsernameInvalidError, PeerIdInvalidError, FloodWaitError, ValueError, Exception) as e:
+            logger.error(f"Error resolving user {identifier}: {e}\n{traceback.format_exc()}")
+            await event.respond(
+                message=f"**Failed to resolve user {identifier}: {str(e)} ❌**",
+                parse_mode='markdown'
+            )
             return None, None, None
 
     def format_time_duration(start_time, end_time):
@@ -89,10 +101,12 @@ def setup_sudo_handler(app: TelegramClient):
         seconds = total_seconds % 60
         return f"{hours:02d}:{minutes:02d}:{seconds:02d}"
 
-    @app.on(events.NewMessage(pattern=f'({"|".join(COMMAND_PREFIX)})getadmins$'))
+    @app.on(events.NewMessage(pattern=f'({"|".join(COMMAND_PREFIX)})getadmins'))
     async def get_admins_command(event):
         user_id = event.sender_id
+        logger.info(f"/getadmins command triggered by user {user_id}")
         if user_id != OWNER_ID:
+            logger.info(f"Unauthorized /getadmins attempt by user {user_id}")
             return
         loading_message = await event.client.send_message(
             entity=event.chat_id,
@@ -115,7 +129,8 @@ def setup_sudo_handler(app: TelegramClient):
                 f"**⊗ Auth By ➺** [{owner_full_name}](tg://user?id={OWNER_ID})",
                 "**━━━━━━━━━━━━━**"
             ])
-        except Exception:
+        except Exception as e:
+            logger.error(f"Error fetching owner {OWNER_ID}: {e}\n{traceback.format_exc()}")
             admin_list.extend([
                 f"**⊗ Name ➺** ID {OWNER_ID} (Not found)",
                 f"**⊗ Title ➺** Owner",
@@ -147,13 +162,14 @@ def setup_sudo_handler(app: TelegramClient):
                     f"**⊗ Title ➺** {data['title']}",
                     f"**⊗ Username ➺** {username}",
                     f"**⊗ UserID ➺** `{admin_id}`",
-                   "f**⊗ Auth Time ➺** {time_str}",
+                    f"**⊗ Auth Time ➺** {time_str}",
                     f"**⊗ Auth Date ➺** {auth_date}",
                     f"**⊗ Auth By ➺** {auth_by_text}",
                     "**━━━━━━━━━━━━━**"
                 ])
                 total_admins += 1
-            except Exception:
+            except Exception as e:
+                logger.error(f"Error fetching admin {admin_id}: {e}\n{traceback.format_exc()}")
                 auth_time = data["auth_time"]
                 time_str = auth_time.strftime("%H:%M:%S")
                 auth_date = auth_time.strftime("%Y-%m-%d")
@@ -175,35 +191,34 @@ def setup_sudo_handler(app: TelegramClient):
             buttons=[[Button.inline("✘ Close ↯", "close_admins$")]]
         )
 
-    @app.on(events.NewMessage(pattern=f'({"|".join(COMMAND_PREFIX)})auth$'))
+    @app.on(events.NewMessage(pattern=f'({"|".join(COMMAND_PREFIX)})auth'))
     async def auth_command(event):
         user_id = event.sender_id
+        logger.info(f"/auth command triggered by user {user_id} with input: {event.raw_text}")
         if user_id != OWNER_ID:
+            logger.info(f"Unauthorized /auth attempt by user {user_id}")
             return
-        args = event.message.text.split(maxsplit=2)
+        args = event.raw_text.split(maxsplit=2)
         if len(args) < 2:
-            await event.client.send_message(
-                entity=event.chat_id,
-                message="**Please Provide Specify A Valid User To Promote❌**",
+            await event.respond(
+                message="**Please Provide A Valid User To Promote ❌**",
                 parse_mode='markdown'
             )
+            logger.info("No user identifier provided for /auth")
             return
-        identifier = args[1]
-        title = args[2] if len(args) > 2 else "Admin"
-        target_user_id, full_name, username = await resolve_user(event.client, identifier)
+        identifier = args[1].strip()
+        title = args[2].strip() if len(args) > 2 else "Admin"
+        logger.info(f"Resolving user {identifier} for /auth")
+        target_user_id, full_name, username = await resolve_user(event.client, identifier, event)
         if not target_user_id:
-            await event.client.send_message(
-                entity=event.chat_id,
-                message="**Please Provide Specify A Valid User To Promote❌**",
-                parse_mode='markdown'
-            )
+            logger.info(f"Failed to resolve user {identifier} for /auth")
             return
         if target_user_id == OWNER_ID:
-            await event.client.send_message(
-                entity=event.chat_id,
+            await event.respond(
                 message="**Cannot Modify Owners Permission ↯**",
                 parse_mode='markdown'
             )
+            logger.info("Attempted to modify owner permissions")
             return
         loading_message = await event.client.send_message(
             entity=event.chat_id,
@@ -214,49 +229,60 @@ def setup_sudo_handler(app: TelegramClient):
         try:
             owner_user = await event.client.get_entity(OWNER_ID)
             auth_by = f"{owner_user.first_name} {getattr(owner_user, 'last_name', '')}".strip()
-        except Exception:
+        except Exception as e:
+            logger.error(f"Error fetching owner for auth_by: {e}\n{traceback.format_exc()}")
             auth_by = "Unknown"
         if await add_auth_admin(target_user_id, title, username, full_name, auth_by):
+            try:
+                reply_markup = ReplyInlineMarkup([
+                    KeyboardButtonRow([
+                        InputKeyboardButtonUserProfile("View Profile", await event.client.get_input_entity(target_user_id))
+                    ])
+                ])
+            except Exception as e:
+                logger.error(f"Error creating user profile button: {e}")
+                reply_markup = [[Button.url("View Profile", f"tg://user?id={target_user_id}")]]
             await loading_message.edit(
                 text=f"**Successfully Promoted [{full_name}](tg://user?id={target_user_id}) ✅**",
                 parse_mode='markdown',
-                buttons=[[KeyboardButtonUserProfile(text="View Profile", user_id=int(target_user_id))]],
+                buttons=reply_markup,
                 link_preview=False
             )
+            logger.info(f"Successfully promoted user {target_user_id} with title {title}")
         else:
             await loading_message.edit(
                 text="**Sorry Failed To Promote User ❌**",
                 parse_mode='markdown'
             )
+            logger.error(f"Failed to promote user {target_user_id}")
 
-    @app.on(events.NewMessage(pattern=f'({"|".join(COMMAND_PREFIX)})unauth$'))
+    @app.on(events.NewMessage(pattern=f'({"|".join(COMMAND_PREFIX)})unauth'))
     async def unauth_command(event):
         user_id = event.sender_id
+        logger.info(f"/unauth command triggered by user {user_id} with input: {event.raw_text}")
         if user_id != OWNER_ID:
+            logger.info(f"Unauthorized /unauth attempt by user {user_id}")
             return
-        args = event.message.text.split(maxsplit=1)
+        args = event.raw_text.split(maxsplit=1)
         if len(args) < 2:
-            await event.client.send_message(
-                entity=event.chat_id,
-                message="**Please Provide Specify A Valid User To Demote❌**",
+            await event.respond(
+                message="**Please Provide A Valid User To Demote ❌**",
                 parse_mode='markdown'
             )
+            logger.info("No user identifier provided for /unauth")
             return
-        identifier = args[1]
-        target_user_id, full_name, username = await resolve_user(event.client, identifier)
+        identifier = args[1].strip()
+        logger.info(f"Resolving user {identifier} for /unauth")
+        target_user_id, full_name, username = await resolve_user(event.client, identifier, event)
         if not target_user_id:
-            await event.client.send_message(
-                entity=event.chat_id,
-                message="**Please Provide Specify A Valid User To Demote❌**",
-                parse_mode='markdown'
-            )
+            logger.info(f"Failed to resolve user {identifier} for /unauth")
             return
         if target_user_id == OWNER_ID:
-            await event.client.send_message(
-                entity=event.chat_id,
+            await event.respond(
                 message="**Cannot Modify Owners Permission ❌**",
                 parse_mode='markdown'
             )
+            logger.info("Attempted to modify owner permissions")
             return
         loading_message = await event.client.send_message(
             entity=event.chat_id,
@@ -265,26 +291,40 @@ def setup_sudo_handler(app: TelegramClient):
         )
         await asyncio.sleep(1)
         if await remove_auth_admin(target_user_id):
+            try:
+                reply_markup = ReplyInlineMarkup([
+                    KeyboardButtonRow([
+                        InputKeyboardButtonUserProfile("View Profile", await event.client.get_input_entity(target_user_id))
+                    ])
+                ])
+            except Exception as e:
+                logger.error(f"Error creating user profile button: {e}")
+                reply_markup = [[Button.url("View Profile", f"tg://user?id={target_user_id}")]]
             await loading_message.edit(
                 text=f"**Successfully Demoted [{full_name}](tg://user?id={target_user_id}) ✅**",
                 parse_mode='markdown',
-                buttons=[[KeyboardButtonUserProfile(text="View Profile", user_id=int(target_user_id))]],
+                buttons=reply_markup,
                 link_preview=False
             )
+            logger.info(f"Successfully demoted user {target_user_id}")
         else:
             await loading_message.edit(
                 text="**Sorry Failed To Demote User ❌**",
                 parse_mode='markdown'
             )
+            logger.error(f"Failed to demote user {target_user_id}")
 
     @app.on(events.CallbackQuery(pattern=r"^close_admins\$"))
     async def handle_close_callback(event):
         user_id = event.sender_id
+        logger.info(f"Close admins callback triggered by user {user_id}")
         if user_id != OWNER_ID:
             await event.answer(
                 text="🛑 Action Not Allowed For You",
                 show_alert=True
             )
+            logger.info(f"Unauthorized close admins attempt by user {user_id}")
             return
         await event.delete()
         await event.answer()
+        logger.info("Admins list closed")

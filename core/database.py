@@ -1,3 +1,5 @@
+#Copyright @ISmartCoder
+#Updates Channel t.me/TheSmartDev
 from motor.motor_asyncio import AsyncIOMotorClient
 from urllib.parse import urlparse, parse_qs
 from config import DATABASE_URL
@@ -19,3 +21,4 @@ try:
 except Exception as e:
     LOGGER.error(f"Database Client Create Error: {e}")
     raise
+

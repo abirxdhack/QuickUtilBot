@@ -1,3 +1,5 @@
+#Copyright @ISmartCoder
+#Updates Channel t.me/TheSmartDev
 import asyncio
 import aiohttp
 import random
@@ -139,7 +141,7 @@ def setup_extp_handler(app: TelegramClient):
         flag_emoji = get_flag_emoji(country_code) if country_code else ''
         
         regenerated_message = (
-            f"**�_E𝘅𝘁𝗿𝗮𝗽** ⇾ {bin}\n"
+            f"**E𝘅𝘁𝗿𝗮𝗽** ⇾ {bin}\n"
             f"**Amount** ⇾ {len(formatted_numbers)}\n\n"
             + "\n".join(formatted_numbers) + "\n\n"
             f"**Bank :** {bin_info.get('Issuer', 'None')}\n"
@@ -205,4 +207,5 @@ def setup_extp_handler(app: TelegramClient):
         markup = ReplyInlineMarkup([KeyboardButtonRow([Button.inline("Re-Generate", f"regenerate_{bin}_{user_id}")])])
         msg = await event.get_message()
         if msg and msg.text != regenerated_message:
+
             await event.edit(regenerated_message, parse_mode='md', buttons=markup)

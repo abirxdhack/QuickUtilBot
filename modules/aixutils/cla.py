@@ -1,3 +1,5 @@
+#Copyright @ISmartCoder
+#Updates Channel t.me/TheSmartDev
 import os
 import logging
 import json
@@ -72,4 +74,5 @@ def setup_cla_handler(app: TelegramClient):
             LOGGER.error(f"Error during Claude generation: {e}")
             if loading_message:
                 await event.client.edit_message(loading_message, "**🔍 Sorry, Claude AI ✨ failed to respond.**", parse_mode='md')
+
             await notify_admin(event.client, "/cla", e, event)

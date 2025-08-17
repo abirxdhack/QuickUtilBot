@@ -1,7 +1,7 @@
 from misc import handle_callback_query
 from telethon import events
 from telethon.tl.types import UpdateShortMessage, UpdateNewMessage
-from utils import LOGGER
+from utils import LOGGER, setup_nfy_handler
 from core import setup_start_handler, restart_messages
 from app import app
 import asyncio
@@ -25,6 +25,7 @@ async def main():
     except Exception as e:
         LOGGER.error(f"Failed to fetch restart message from database: {e}")
     setup_start_handler(app)
+    setup_nfy_handler(app)
     app.add_event_handler(handle_callback_query, events.CallbackQuery())
 if __name__ == '__main__':
     loop = asyncio.get_event_loop()

@@ -1,6 +1,5 @@
-#Copyright @ISmartDevs
-#Channel t.me/TheSmartDev
-#Connect All Sub Modules With __init__.py Method By @abirxdhackz And @ISmartDevs
+#Copyright @ISmartCoder
+#Updates Channel t.me/TheSmartDev
 from .admin.admin import setup_admin_handler
 from .logs.logs import setup_logs_handler
 from .restart.restart import setup_restart_handler
@@ -17,3 +16,4 @@ def setup_sudoers_handlers(app):
     setup_speed_handler(app)
     setup_settings_handler(app)
     setup_gban_handler(app)
+

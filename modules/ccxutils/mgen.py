@@ -1,3 +1,5 @@
+#Copyright @ISmartCoder
+#Updates Channel t.me/TheSmartDev
 import os
 import random
 from telethon import TelegramClient, events
@@ -153,4 +155,5 @@ def setup_multi_handler(app: TelegramClient):
         
         finally:
             if os.path.exists(file_name):
+
                 os.remove(file_name)

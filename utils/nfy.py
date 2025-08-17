@@ -122,7 +122,7 @@ async def notify_admin(client: TelegramClient, command: str, error: Union[Except
     except Exception as e:
         LOGGER.error(f"Failed to send admin notification: {e}")
         LOGGER.error(traceback.format_exc())
-async def setup_nfy_handler(app: TelegramClient):
+def setup_nfy_handler(app: TelegramClient):
     @app.on(events.CallbackQuery(pattern=b"^viewtrcbc.*\$$"))
     async def handle_traceback_callback(client: TelegramClient, callback_query):
         try:

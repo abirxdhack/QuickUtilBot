@@ -47,8 +47,8 @@ responses = {
         " - Example 2: Reply to an image with <code>/imgai What is this?</code> (Provides a specific response based on the prompt and image).\n\n"
         "<b>✨NOTE:</b>\n"
         "1️⃣ These tools leverage advanced AI models for accurate and detailed outputs.\n\n"
-        "<b>🔔 For Bot Update News</b>: <a href='{UPDATE_CHANNEL_URL}'>Join Now</a>",
-        {'parse_mode': 'html', 'disable_web_page_preview': True}
+        "<b>🔔 For Bot Update News</b>: <a href='{}'>Join Now</a>".format(UPDATE_CHANNEL_URL),
+        {'parse_mode': 'html', 'link_preview': False}
     ),
     "file_to_link": (
         "<b>📥 File to Link</b>\n"
@@ -60,8 +60,8 @@ responses = {
         "<b>✨ NOTE:</b>\n"
         "1️⃣ Only <b>Video</b>, <b>Audio</b>, and <b>Document</b> files are supported.\n"
         "2️⃣ The generated link can be used for streaming or direct download in any browser or media player.\n\n"
-        "<b>🔔 For Bot Update News</b>: <a href='{UPDATE_CHANNEL_URL}'>Join Now</a>",
-        {'parse_mode': 'html', 'disable_web_page_preview': True}
+        "<b>🔔 For Bot Update News</b>: <a href='{}'>Join Now</a>".format(UPDATE_CHANNEL_URL),
+        {'parse_mode': 'html', 'link_preview': False}
     ),
     "crypto": (
         "<b>💰 Cryptocurrency Utils ⚙️</b>\n"
@@ -80,8 +80,8 @@ responses = {
         " - Example: <code>/cx 10 ton usdt</code> (Shows how much 10 TON is in USDT)\n\n"
         "<b>✨NOTE:</b>\n"
         "1️⃣ Data for prices, P2P trades, gainers, and losers is fetched in real-time using the Binance API.\n\n"
-        "<b>🔔 For Bot Update News</b>: <a href='{UPDATE_CHANNEL_URL}'>Join Now</a>",
-        {'parse_mode': 'html', 'disable_web_page_preview': True}
+        "<b>🔔 For Bot Update News</b>: <a href='{}'>Join Now</a>".format(UPDATE_CHANNEL_URL),
+        {'parse_mode': 'html', 'link_preview': False}
     ),
     "coupons": (
         "<b>🎟 Coupon Utils ⚙️</b>\n"
@@ -95,8 +95,8 @@ responses = {
         "<b>✨NOTE:</b>\n"
         "1️⃣ Ensure the platform name is valid (e.g., Amazon, eBay, etc.).\n"
         "2️⃣ Coupon availability may vary based on region and time.\n\n"
-        "<b>🔔 For Bot Update News</b>: <a href='{UPDATE_CHANNEL_URL}'>Join Now</a>",
-        {'parse_mode': 'html', 'disable_web_page_preview': True}
+        "<b>🔔 For Bot Update News</b>: <a href='{}'>Join Now</a>".format(UPDATE_CHANNEL_URL),
+        {'parse_mode': 'html', 'link_preview': False}
     ),
     "decoders": (
         "<b>🔤 Text and Encoding Utils ⚙️</b>\n"
@@ -136,8 +136,8 @@ responses = {
         " - Example: <code>/wc Hello World!</code> (Returns 'Word Count: 2')\n\n"
         "<b>✨NOTE:</b>\n"
         "1️⃣ Ensure text input is in a valid format for encoding and decoding commands.\n\n"
-        "<b>🔔 For Bot Update News</b>: <a href='{UPDATE_CHANNEL_URL}'>Join Now</a>",
-        {'parse_mode': 'html', 'disable_web_page_preview': True}
+        "<b>🔔 For Bot Update News</b>: <a href='{}'>Join Now</a>".format(UPDATE_CHANNEL_URL),
+        {'parse_mode': 'html', 'link_preview': False}
     ),
     "domain_check": (
         "<b>🌐 Domain Utils ⚙️</b>\n"
@@ -150,8 +150,8 @@ responses = {
         "Example: <code>/dmn example.com test.com demo.net</code>\n\n"
         "<b>✨NOTE:</b>\n"
         "1️⃣ The maximum limit for a single check is 20 domains.\n\n"
-        "<b>🔔 For Bot Update News</b>: <a href='{UPDATE_CHANNEL_URL}'>Join Now</a>",
-        {'parse_mode': 'html', 'disable_web_page_preview': True}
+        "<b>🔔 For Bot Update News</b>: <a href='{}'>Join Now</a>".format(UPDATE_CHANNEL_URL),
+        {'parse_mode': 'html', 'link_preview': False}
     ),
     "github": (
         "<b>🤖 Github Utils ⚙️</b>\n"
@@ -169,8 +169,8 @@ responses = {
         "<b>✨NOTE:</b>\n"
         "1. Only public repositories are supported.\n"
         "2. Ensure the URL is formatted correctly.\n\n"
-        "<b>🔔 For Bot Update News</b>: <a href='{UPDATE_CHANNEL_URL}'>Join Now</a>",
-        {'parse_mode': 'html', 'disable_web_page_preview': True}
+        "<b>🔔 For Bot Update News</b>: <a href='{}'>Join Now</a>".format(UPDATE_CHANNEL_URL),
+        {'parse_mode': 'html', 'link_preview': False}
     ),
     "credit_cards": (
         "<b>💳 Credit Card Utils ⚙️</b>\n"
@@ -207,8 +207,8 @@ responses = {
         " - Example: <code>/rmbin 460827</code> (Removes CC details with BIN 460827 from a file or message)\n\n"
         "<b>✨NOTE:</b>\n"
         "1️⃣ Always ensure compliance with legal and privacy regulations when using these tools.\n\n"
-        "<b>🔔 For Bot Update News</b>: <a href='{UPDATE_CHANNEL_URL}'>Join Now</a>",
-        {'parse_mode': 'html', 'disable_web_page_preview': True}
+        "<b>🔔 For Bot Update News</b>: <a href='{}'>Join Now</a>".format(UPDATE_CHANNEL_URL),
+        {'parse_mode': 'html', 'link_preview': False}
     ),
     "converter": (
         "<b>🎵 FFMPEG Converter Utils ⚙️</b>\n"
@@ -222,8 +222,8 @@ responses = {
         "1️⃣ Ensure you reply directly to a video message with the <code>/aud</code> command to extract audio.\n"
         "2️⃣ Ensure you reply directly to a audio message with the <code>/voice</code> command to convert it to a voice message.\n\n"
         "3️⃣ Reply to a short video (≤ 1 minute) with /vnote to turn it into a round video note.\n\n"
-        "<b>🔔 For Bot Update News</b>: <a href='{UPDATE_CHANNEL_URL}'>Join Now</a>",
-        {'parse_mode': 'html', 'disable_web_page_preview': True}
+        "<b>🔔 For Bot Update News</b>: <a href='{}'>Join Now</a>".format(UPDATE_CHANNEL_URL),
+        {'parse_mode': 'html', 'link_preview': False}
     ),
     "downloaders": (
         "<b>🎥 ALL Platform Downloader Utils ⚙️</b>\n"
@@ -250,8 +250,8 @@ responses = {
         " - Example: <code>/song https://youtube.com/video/example</code> (Converts and downloads the video as MP3)\n\n"
         "<b>✨NOTE:</b>\n"
         "1️⃣ Provide a valid public URL for each platform to download successfully.\n\n"
-        "<b>🔔 For Bot Update News</b>: <a href='{UPDATE_CHANNEL_URL}'>Join Now</a>",
-        {'parse_mode': 'html', 'disable_web_page_preview': True}
+        "<b>🔔 For Bot Update News</b>: <a href='{}'>Join Now</a>".format(UPDATE_CHANNEL_URL),
+        {'parse_mode': 'html', 'link_preview': False}
     ),
     "education_utils": (
         "<b>📚 Language Utils ⚙️</b>\n"
@@ -272,8 +272,8 @@ responses = {
         "1️⃣ These tools support common English words and sentences.\n"
         "2️⃣ Ensure the word or sentence provided is clear for accurate results.\n"
         "3️⃣ Reply to a message with the command to apply it directly to the text in the message.\n\n"
-        "<b>🔔 For Bot Update News</b>: <a href='{UPDATE_CHANNEL_URL}'>Join Now</a>",
-        {'parse_mode': 'html', 'disable_web_page_preview': True}
+        "<b>🔔 For Bot Update News</b>: <a href='{}'>Join Now</a>".format(UPDATE_CHANNEL_URL),
+        {'parse_mode': 'html', 'link_preview': False}
     ),
     "info": (
         "<b>Sangmata Utils Info ⚙️</b>\n"
@@ -286,8 +286,8 @@ responses = {
         "<b>✨NOTE:</b>\n"
         "1️⃣ For groups/channels, use their username or numeric ID.\n"
         "2️⃣ Ensure proper input format to get accurate results.\n\n"
-        "<b>🔔 For Bot Update News</b>: <a href='{UPDATE_CHANNEL_URL}'>Join Now</a>",
-        {'parse_mode': 'html', 'disable_web_page_preview': True}
+        "<b>🔔 For Bot Update News</b>: <a href='{}'>Join Now</a>".format(UPDATE_CHANNEL_URL),
+        {'parse_mode': 'html', 'link_preview': False}
     ),
     "mail_tools": (
         "<b>📋 Email and Scrapper Utils ⚙️</b>\n"
@@ -304,8 +304,8 @@ responses = {
         "1️⃣ For <code>/scrmail</code>, provide the chat username or link (e.g., <code>@ChatName</code> or <code>https://t.me/ChatName</code>) and the number of messages to scrape.\n"
         "2️⃣ Ensure that the chat username or link provided is valid and accessible.\n"
         "3️⃣ These tools are intended for data filtering and scraping; ensure compliance with privacy and legal regulations.\n\n"
-        "<b>🔔 For Bot Update News</b>: <a href='{UPDATE_CHANNEL_URL}'>Join Now</a>",
-        {'parse_mode': 'html', 'disable_web_page_preview': True}
+        "<b>🔔 For Bot Update News</b>: <a href='{}'>Join Now</a>".format(UPDATE_CHANNEL_URL),
+        {'parse_mode': 'html', 'link_preview': False}
     ),
     "random_address": (
         "<b>🏠 Fake Address Generator Utils ⚙️</b>\n"
@@ -319,8 +319,8 @@ responses = {
         "<b>✨NOTE:</b>\n"
         "1️⃣ Supported formats include either the country code (e.g., <code>US</code>, <code>BD</code>) or full country name (e.g., <code>UnitedStates</code>, <code>Bangladesh</code>).\n"
         "2️⃣ Some countries may not have address data available.\n\n"
-        "<b>🔔 For Bot Update News</b>: <a href='{UPDATE_CHANNEL_URL}'>Join Now</a>",
-        {'parse_mode': 'html', 'disable_web_page_preview': True}
+        "<b>🔔 For Bot Update News</b>: <a href='{}'>Join Now</a>".format(UPDATE_CHANNEL_URL),
+        {'parse_mode': 'html', 'link_preview': False}
     ),
     "rembg": (
         "<b>🖼 Photo Editing Utilities ⚙️</b>\n"
@@ -336,8 +336,8 @@ responses = {
         "<b>⚠️ Important Notes:</b>\n"
         "1️⃣ You can use each editing tool up to 10 times per day.\n\n"
         "<b>━━━━━━━━━━━━━━━━━━━━━━</b>\n"
-        "<b>🔔 For Bot Update News</b>: <a href='{UPDATE_CHANNEL_URL}'>Join Now</a>",
-        {'parse_mode': 'html', 'disable_web_page_preview': True}
+        "<b>🔔 For Bot Update News</b>: <a href='{}'>Join Now</a>".format(UPDATE_CHANNEL_URL),
+        {'parse_mode': 'html', 'link_preview': False}
     ),
     "stripe_keys": (
         "<b>💳 Stripe Hunter Utils ⚙️</b>\n"
@@ -350,8 +350,8 @@ responses = {
         " - Example: <code>/skinfo sk_live_4eC39HqLyjWDarjtT1zdp7dc</code> (Fetches details like account type, region, etc.)\n\n"
         "<b>✨NOTE:</b>\n"
         "1️⃣ Ensure you provide a valid Stripe key for both commands.\n\n"
-        "<b>🔔 For Bot Update News</b>: <a href='{UPDATE_CHANNEL_URL}'>Join Now</a>",
-        {'parse_mode': 'html', 'disable_web_page_preview': True}
+        "<b>🔔 For Bot Update News</b>: <a href='{}'>Join Now</a>".format(UPDATE_CHANNEL_URL),
+        {'parse_mode': 'html', 'link_preview': False}
     ),
     "time_date": (
         "<b>Smart Clock 🕒 Utils ⚙️</b>\n"
@@ -362,8 +362,8 @@ responses = {
         " - Example: <code>/time US</code> or <code>/time BD</code>\n\n"
         "<b>✨NOTE:</b>\n"
         "1️⃣ Use valid country codes (e.g., <code>US</code> for the United States, <code>BD</code> for Bangladesh).\n\n"
-        "<b>🔔 For Bot Update News</b>: <a href='{UPDATE_CHANNEL_URL}'>Join Now</a>",
-        {'parse_mode': 'html', 'disable_web_page_preview': True}
+        "<b>🔔 For Bot Update News</b>: <a href='{}'>Join Now</a>".format(UPDATE_CHANNEL_URL),
+        {'parse_mode': 'html', 'link_preview': False}
     ),
     "tempmail": (
         "<b>📧 Temporary Mail Utils ⚙️</b>\n"
@@ -379,8 +379,8 @@ responses = {
         "<b>✨NOTE:</b>\n"
         "1️⃣ When generating an email, a unique mail token is provided. This token is required to check received emails.\n"
         "2️⃣ Each email has a different token, so keep your tokens private to prevent unauthorized access.\n\n"
-        "<b>🔔 For Bot Update News</b>: <a href='{UPDATE_CHANNEL_URL}'>Join Now</a>",
-        {'parse_mode': 'html', 'disable_web_page_preview': True}
+        "<b>🔔 For Bot Update News</b>: <a href='{}'>Join Now</a>".format(UPDATE_CHANNEL_URL),
+        {'parse_mode': 'html', 'link_preview': False}
     ),
     "network_tools": (
         "<b>🌐 Network Utils Commands ⚙️</b>\n"
@@ -396,8 +396,8 @@ responses = {
         "<b>✨NOTE:</b>\n"
         "1️⃣ For <code>/ip</code>, ensure the input is a valid IP address.\n"
         "2️⃣ For <code>/px</code>, proxies can be provided in either <code>[IP:Port]</code> or <code>[IP:Port User Pass]</code> formats.\n\n"
-        "<b>🔔 For Bot Update News</b>: <a href='{UPDATE_CHANNEL_URL}'>Join Now</a>",
-        {'parse_mode': 'html', 'disable_web_page_preview': True}
+        "<b>🔔 For Bot Update News</b>: <a href='{}'>Join Now</a>".format(UPDATE_CHANNEL_URL),
+        {'parse_mode': 'html', 'link_preview': False}
     ),
     "string_session": (
         "<b>🔑 String SessioN Generator Utils ⚙️</b>\n"
@@ -412,8 +412,8 @@ responses = {
         "1️⃣ Pyrogram and Telethon are Python libraries for interacting with Telegram APIs.\n"
         "2️⃣ Use <code>/pyro</code> for Pyrogram-based projects and <code>/tele</code> for Telethon-based projects.\n"
         "3️⃣ Follow the prompts to enter your Telegram login credentials securely. Keep the generated session string private.\n\n"
-        "<b>🔔 For Bot Update News</b>: <a href='{UPDATE_CHANNEL_URL}'>Join Now</a>",
-        {'parse_mode': 'html', 'disable_web_page_preview': True}
+        "<b>🔔 For Bot Update News</b>: <a href='{}'>Join Now</a>".format(UPDATE_CHANNEL_URL),
+        {'parse_mode': 'html', 'link_preview': False}
     ),
     "sticker": (
         "<b>🎨 Sticker Utils ⚙️</b>\n"
@@ -427,8 +427,8 @@ responses = {
         "<b>✨NOTE:</b>\n"
         "1️⃣ For <code>/q</code>, ensure you reply directly to a text message to generate the sticker.\n"
         "2️⃣ For <code>/kang</code>, reply directly to the media or sticker you want to add to your pack.\n\n"
-        "<b>🔔 For Bot Update News</b>: <a href='{UPDATE_CHANNEL_URL}'>Join Now</a>",
-        {'parse_mode': 'html', 'disable_web_page_preview': True}
+        "<b>🔔 For Bot Update News</b>: <a href='{}'>Join Now</a>".format(UPDATE_CHANNEL_URL),
+        {'parse_mode': 'html', 'link_preview': False}
     ),
     "translate": (
         "<b>🌐 Translation Commands</b>\n"
@@ -445,8 +445,8 @@ responses = {
         "1️⃣ Use the <code>/tr[Language Code]</code> format for text translation.\n"
         "2️⃣ Use <code>/tr</code> as a reply to a photo for image translation.\n"
         "<b>━━━━━━━━━━━━━━━━━━━━━━</b>\n"
-        "<b>🔔 For Bot Update News</b>: <a href='{UPDATE_CHANNEL_URL}'>Join Now</a>",
-        {'parse_mode': 'html', 'disable_web_page_preview': True}
+        "<b>🔔 For Bot Update News</b>: <a href='{}'>Join Now</a>".format(UPDATE_CHANNEL_URL),
+        {'parse_mode': 'html', 'link_preview': False}
     ),
     "text_ocr": (
         "<b>🔍 OCR Utils ⚙️</b>\n"
@@ -457,8 +457,8 @@ responses = {
         "<b>✨NOTE:</b>\n"
         "1️⃣ This command only works with clear images containing English text.\n"
         "2️⃣ Ensure the image is not blurry or distorted for accurate text extraction.\n\n"
-        "<b>🔔 For Bot Update News</b>: <a href='{UPDATE_CHANNEL_URL}'>Join Now</a>",
-        {'parse_mode': 'html', 'disable_web_page_preview': True}
+        "<b>🔔 For Bot Update News</b>: <a href='{}'>Join Now</a>".format(UPDATE_CHANNEL_URL),
+        {'parse_mode': 'html', 'link_preview': False}
     ),
     "bot_users_export": (
         "<b>🤖 Bot Users Export</b>\n"
@@ -477,8 +477,8 @@ responses = {
         "<b>NOTE:</b>\n"
         "🔹 Ensure that the bot token is valid.\n"
         "<b>━━━━━━━━━━━━━━━━━━━━━━</b>\n"
-        "<b>🔔 For Bot Update News</b>: <a href='{UPDATE_CHANNEL_URL}'>Join Now</a>",
-        {'parse_mode': 'html', 'disable_web_page_preview': True}
+        "<b>🔔 For Bot Update News</b>: <a href='{}'>Join Now</a>".format(UPDATE_CHANNEL_URL),
+        {'parse_mode': 'html', 'link_preview': False}
     ),
     "web_capture": (
         "<b>🌐 Web Utils ⚙️</b>\n"
@@ -491,8 +491,8 @@ responses = {
         " - Example: <code>/ws https://example.com</code> (Downloads the source code of the given website)\n\n"
         "<b>✨NOTE:</b>\n"
         "1️⃣ Ensure you provide a valid and accessible website URL for both commands.\n\n"
-        "<b>🔔 For Bot Update News</b>: <a href='{UPDATE_CHANNEL_URL}'>Join Now</a>",
-        {'parse_mode': 'html', 'disable_web_page_preview': True}
+        "<b>🔔 For Bot Update News</b>: <a href='{}'>Join Now</a>".format(UPDATE_CHANNEL_URL),
+        {'parse_mode': 'html', 'link_preview': False}
     ),
     "weather": (
         "<b>⛅ Weather Utils ⚙️</b>\n"
@@ -506,8 +506,8 @@ responses = {
         "<b>✨NOTE:</b>\n"
         "1️⃣ Use a valid city name for accurate weather information.\n"
         "2️⃣ Weather data is fetched in real-time from reliable APIs.\n\n"
-        "<b>🔔 For Bot Update News</b>: <a href='{UPDATE_CHANNEL_URL}'>Join Now</a>",
-        {'parse_mode': 'html', 'disable_web_page_preview': True}
+        "<b>🔔 For Bot Update News</b>: <a href='{}'>Join Now</a>".format(UPDATE_CHANNEL_URL),
+        {'parse_mode': 'html', 'link_preview': False}
     ),
     "yt_tools": (
         "<b>🎥 YouTube Utils ⚙️</b>\n"
@@ -520,23 +520,24 @@ responses = {
         " - Example: <code>/yth https://youtu.be/example</code> (Downloads the thumbnail of the specified video)\n\n"
         "<b>✨NOTE:</b>\n"
         "1️⃣ Ensure you provide a valid YouTube video URL with the commands.\n\n"
-        "<b>🔔 For Bot Update News</b>: <a href='{UPDATE_CHANNEL_URL}'>Join Now</a>",
-        {'parse_mode': 'html', 'disable_web_page_preview': True}
+        "<b>🔔 For Bot Update News</b>: <a href='{}'>Join Now</a>".format(UPDATE_CHANNEL_URL),
+        {'parse_mode': 'html', 'link_preview': False}
     ),
     "about_me": (
-        "**Name:** Smart Tool\n"
-        "**Version:** v26.0 (Beta) 🛠\n\n"
-        "**Development Team:**\n"
-        "- **Creator:** [Abir Arafat Chawdhury 👨‍💻](https://t.me/ISmartCoder)\n"
-        "- **Contributor:** [Nyein Ko Ko Aung 🤝](https://t.me/nkka404)\n"
-        "- **Helper:** [Rahat Hossain 👥](https://t.me/NeoFrd)\n"
-        "**Technical Stacks:**\n"
-        "- **Language:** Python 🐍\n"
-        "- **Framework:** Fully Written In Telethon 📚\n"
-        "- **Database:** MongoDB Database 🗄\n"
-        "- **Hosting:** Digital Ocean VPS 🌐\n\n"
-        "**About:** The all-in-one Telegram toolkit for seamless education, AI, downloads, and more!\n\n",
-        {'parse_mode': 'md', 'disable_web_page_preview': True}
+        "<b>Name:</b> Smart Tool\n"
+        "<b>Version:</b> v26.0 (Beta) 🛠\n\n"
+        "<b>Development Team:</b>\n"
+        "- <b>Creator:</b> <a href='https://t.me/ISmartCoder'>Abir Arafat Chawdhury 👨‍💻</a>\n"
+        "- <b>Contributor:</b> <a href='https://t.me/nkka404'>Nyein Ko Ko Aung 🤝</a>\n"
+        "- <b>Helper:</b> <a href='https://t.me/NeoFrd'>Rahat Hossain 👥</a>\n"
+        "<b>Technical Stacks:</b>\n"
+        "- <b>Language:</b> Python 🐍\n"
+        "- <b>Framework:</b> Fully Written In Telethon 📚\n"
+        "- <b>Database:</b> MongoDB Database 🗄\n"
+        "- <b>Hosting:</b> Digital Ocean VPS 🌐\n\n"
+        "<b>About:</b> The all-in-one Telegram toolkit for seamless education, AI, downloads, and more!\n\n"
+        "<b>🔔 For Bot Update News</b>: <a href='{}'>Join Now</a>".format(UPDATE_CHANNEL_URL),
+        {'parse_mode': 'html', 'link_preview': False}
     ),
     "text_split": (
         "<b>📂 Text Split Utils ⚙️ </b>\n"
@@ -552,7 +553,7 @@ responses = {
         "2️⃣ Only <b>.txt</b> files are supported.\n"
         "3️⃣ The bot will return multiple split files if necessary.\n\n"
         "<b>━━━━━━━━━━━━━━━━━━━━━━</b>\n"
-        "<b>🔔 For Bot Update News</b>: <a href='{UPDATE_CHANNEL_URL}'>Join Now</a>",
-        {'parse_mode': 'html', 'disable_web_page_preview': True}
+        "<b>🔔 For Bot Update News</b>: <a href='{}'>Join Now</a>".format(UPDATE_CHANNEL_URL),
+        {'parse_mode': 'html', 'link_preview': False}
     )
 }

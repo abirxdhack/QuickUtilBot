@@ -1,3 +1,5 @@
+#Copyright @ISmartCoder
+#Updates Channel t.me/TheSmartDev
 import asyncio
 import traceback
 from datetime import datetime
@@ -328,3 +330,4 @@ def setup_sudo_handler(app: TelegramClient):
         await event.delete()
         await event.answer()
         logger.info("Admins list closed")
+

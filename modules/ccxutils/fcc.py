@@ -1,3 +1,5 @@
+#Copyright @ISmartCoder
+#Updates Channel t.me/TheSmartDev
 import re
 import os
 import time
@@ -205,4 +207,5 @@ async def handle_fcc_command(event):
 def setup_fcc_handler(app: TelegramClient):
     @app.on(events.NewMessage(pattern=f'^{COMMAND_PREFIX}(?:fcc|filter)'))
     async def fcc(event):
+
         await handle_fcc_command(event)

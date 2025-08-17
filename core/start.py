@@ -1,3 +1,5 @@
+#Copyright @ISmartCoder
+#Updates Channel t.me/TheSmartDev
 from telethon import TelegramClient, events
 from telethon.tl.types import User, Chat, Channel
 from telethon.tl.custom import Button
@@ -72,4 +74,5 @@ def setup_start_handler(app: TelegramClient):
                 [Button.inline("ℹ️ About Me", b"about_me"), Button.inline("📄 Policy & Terms", b"policy_terms")]
             ],
             link_preview=False
+
         )

@@ -1,3 +1,5 @@
+#Copyright @ISmartCoder
+#Updates Channel t.me/TheSmartDev
 import aiohttp
 from telethon import TelegramClient, events
 from config import COMMAND_PREFIX, BAN_REPLY

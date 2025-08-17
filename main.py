@@ -3,6 +3,7 @@ from telethon import events
 from telethon.tl.types import UpdateShortMessage, UpdateNewMessage
 from utils import LOGGER, setup_nfy_handler
 from suoders import setup_sudoers_handlers
+from modules import setup_modules_handlers
 from core import setup_start_handler, restart_messages
 from user import user 
 from app import app
@@ -30,6 +31,7 @@ async def main():
     setup_start_handler(app)
     setup_nfy_handler(app)
     setup_sudoers_handlers(app)
+    setup_modules_handlers(app)
     app.add_event_handler(handle_callback_query, events.CallbackQuery())
 if __name__ == '__main__':
     loop = asyncio.get_event_loop()

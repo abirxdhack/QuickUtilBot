@@ -28,6 +28,9 @@ from .privxutils.privacy import setup_privacy_handler
 from .infoxutils.info import setup_info_handler
 from .mailxutils.tmail import setup_tmail_handler
 from .mailxutils.fmail import setup_fmail_handlers
+from .timexutils.time import setup_time_handler
+from .grpxutils.wlc import setup_wlc_handler
+from .txtutils.sptxt import setup_txt_handler
 
 def setup_modules_handlers(app):
     setup_ai_handler(app)
@@ -57,3 +60,6 @@ def setup_modules_handlers(app):
     setup_info_handler(app)
     setup_fmail_handlers(app)
     setup_tmail_handler(app)
+    setup_time_handler(app)
+    setup_wlc_handler(app)
+    setup_txt_handler(app)

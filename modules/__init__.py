@@ -1,5 +1,6 @@
 #Copyright @ISmartCoder
 #Updates Channel t.me/TheSmartDev
+
 from .aixutils.ai import setup_ai_handler
 from .aixutils.dep import setup_dep_handler
 from .aixutils.gemi import setup_gem_handler
@@ -14,6 +15,10 @@ from .ccxutils.mgen import setup_multi_handler
 from .ccxutils.top import setup_topbin_handler
 from .ccxutils.gen import setup_gen_handler
 from .ccxutils.bin import setup_bin_handler
+from .cryptxutils.cryptdata import setup_binance_handler
+from .cryptxutils.cryptx import setup_coin_handler
+from .cryptxutils.p2p import setup_p2p_handler
+from .cryptxutils.token import setup_crypto_handler
 
 def setup_modules_handlers(app):
     setup_ai_handler(app)
@@ -30,4 +35,7 @@ def setup_modules_handlers(app):
     setup_topbin_handler(app)
     setup_gen_handler(app)
     setup_bin_handler(app)
-
+    setup_binance_handler(app)
+    setup_coin_handler(app)
+    setup_p2p_handler(app)
+    setup_crypto_handler(app)

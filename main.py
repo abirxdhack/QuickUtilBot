@@ -4,10 +4,12 @@ from telethon.tl.types import UpdateShortMessage, UpdateNewMessage
 from utils import LOGGER, setup_nfy_handler
 from suoders import setup_sudoers_handlers
 from core import setup_start_handler, restart_messages
+from user import user 
 from app import app
 import asyncio
 async def main():
     await app.start()
+    await user.start()
     LOGGER.info("Bot Successfully Started! 💥")
     try:
         restart_data = await restart_messages.find_one()

@@ -2,8 +2,9 @@ import traceback
 from datetime import datetime
 from typing import Optional, Union
 from telethon import TelegramClient, events
-from telethon.tl.types import InputPeerUser, InputPeerChat, InputPeerChannel, KeyboardButtonUserProfile
+from telethon.tl.types import InputPeerUser, InputPeerChat, InputPeerChannel, ReplyInlineMarkup, KeyboardButtonRow, InputKeyboardButtonUserProfile
 from telethon.tl.custom import Button
+from telethon.utils import get_display_name
 from config import OWNER_ID, DEVELOPER_USER_ID, LOG_CHANNEL_ID, UPDATE_CHANNEL_URL
 from .logging_setup import LOGGER
 from app import app
@@ -97,12 +98,13 @@ async def notify_admin(client: TelegramClient, command: str, error: Union[Except
         )
         keyboard_buttons = []
         if user_info['id'] != "N/A":
-            keyboard_buttons.append([
-                KeyboardButtonUserProfile(text="👤 View Profile", user_id=int(user_info['id'])),
-                KeyboardButtonUserProfile(text="🛠 Dev", user_id=int(DEVELOPER_USER_ID))
-            ])
+            user_name = get_display_name(await client.get_entity(user_info['id']))
+            keyboard_buttons.append(KeyboardButtonRow([
+                InputKeyboardButtonUserProfile(user_name, await client.get_input_entity(user_info['id'])),
+                InputKeyboardButtonUserProfile("🛠 Dev", await client.get_input_entity(DEVELOPER_USER_ID))
+            ]))
         keyboard_buttons.append([Button.inline("📄 View Traceback", f"viewtrcbc{error_id}$".encode())])
-        await client.send_message(OWNER_ID, error_report, parse_mode='html', buttons=keyboard_buttons, link_preview=False, silent=(error_level == "WARNING"))
+        await client.send_message(OWNER_ID, error_report, parse_mode='html', buttons=ReplyInlineMarkup(keyboard_buttons), link_preview=False, silent=(error_level == "WARNING"))
         if is_member and channel_id:
             minimal_report = (
                 "<b>🚨 Smart Tools New Bug Report</b>\n"
@@ -187,12 +189,13 @@ def setup_nfy_handler(app: TelegramClient):
             )
             keyboard_buttons = []
             if data['user_info']['id'] != "N/A":
-                keyboard_buttons.append([
-                    KeyboardButtonUserProfile(text="👤 View Profile", user_id=int(data['user_info']['id'])),
-                    KeyboardButtonUserProfile(text="🛠 Dev", user_id=int(DEVELOPER_USER_ID))
-                ])
+                user_name = get_display_name(await client.get_entity(data['user_info']['id']))
+                keyboard_buttons.append(KeyboardButtonRow([
+                    InputKeyboardButtonUserProfile(user_name, await client.get_input_entity(data['user_info']['id'])),
+                    InputKeyboardButtonUserProfile("🛠 Dev", await client.get_input_entity(DEVELOPER_USER_ID))
+                ]))
             keyboard_buttons.append([Button.inline("📄 View Traceback", f"viewtrcbc{error_id}$".encode())])
-            await callback_query.message.edit_message(error_report, parse_mode='html', buttons=keyboard_buttons, link_preview=False)
+            await callback_query.message.edit_message(error_report, parse_mode='html', buttons=ReplyInlineMarkup(keyboard_buttons), link_preview=False)
             await callback_query.answer("Summary Loaded Successful ✅!")
             LOGGER.info(f"Back to summary successful for error_id: {error_id}")
         except Exception as e:

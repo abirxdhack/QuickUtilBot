@@ -1,3 +1,5 @@
+#Copyright @ISmartCoder
+#Updates Channel t.me/TheSmartDev
 import os
 import asyncio
 import logging
@@ -241,3 +243,4 @@ def setup_logs_handler(app: TelegramClient):
                 message="** Sorry, There Was an Issue on the Server ❌**",
                 parse_mode='markdown'
             )
+

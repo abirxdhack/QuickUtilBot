@@ -3,7 +3,7 @@ import uuid
 import hashlib
 import time
 from telethon import TelegramClient, events
-from telethon.tl.types import InputPeerUser, InputPeerChat, InputPeerChannel, KeyboardButtonBuy, InputMediaInvoice, LabeledPrice, Invoice, DataJSON
+from telethon.tl.types import InputPeerUser, InputPeerChat, InputPeerChannel, KeyboardButtonBuy, KeyboardButtonUserProfile, InputMediaInvoice, LabeledPrice, Invoice, DataJSON
 from telethon.tl.custom import Button
 from config import OWNER_ID, DEVELOPER_USER_ID
 
@@ -73,7 +73,7 @@ def get_donation_buttons(amount: int = 5):
         [Button.inline("🔙 Back", b"about_me")]
     ]
 
-async def generate_invoice(client: TelegramClient, chat_id: int, user_id: int, quantity: int, is_callback: bool = False, callback_query = None):
+async def generate_invoice(client: TelegramClient, chat_id: int, user_id: int, quantity: int, is_callback: bool = False, callback_query=None):
     if user_id in active_invoices:
         if is_callback:
             await callback_query.answer("Contribution already in progress!")
@@ -275,4 +275,9 @@ async def raw_update_handler(client: TelegramClient, update, entities):
         except Exception as e:
             logger.error(f"❌ Payment processing failed for user {user_id if user_id else 'unknown'}: {str(e)}")
             if chat_id:
-                await client.send_message(chat_id, PAYMENT_FAILED_TEXT, parse_mode='md', buttons=[[Button.url("📞 Contact Support", f"tg://user?id={DEVELOPER_USER_ID}")]])
+                await client.send_message(
+                    chat_id,
+                    PAYMENT_FAILED_TEXT,
+                    parse_mode='md',
+                    buttons=[[KeyboardButtonUserProfile(text="📞 Contact Support", user_id=int(DEVELOPER_USER_ID))]]
+                )

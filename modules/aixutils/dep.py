@@ -1,3 +1,5 @@
+#Copyright @ISmartCoder
+#Updates Channel t.me/TheSmartDev
 import os
 import aiohttp
 from telethon import TelegramClient, events
@@ -54,4 +56,5 @@ def setup_dep_handler(app: TelegramClient):
         except Exception as e:
             LOGGER.error(f"Error generating response: {e}")
             await event.client.edit_message(temp_message, "**Sorry Bro DeepseekAI✨ API Dead**", parse_mode='md')
+
             await notify_admin(event.client, "/dep", e, event)

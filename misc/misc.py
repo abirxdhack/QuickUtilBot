@@ -18,12 +18,11 @@ from utils import (
     generate_invoice,
     handle_donate_callback
 )
-
 async def handle_callback_query(callback_query):
     call = callback_query
     chat_id = call.chat_id
     user_id = call.sender_id
-    
+   
     if call.data == b"stats":
         now = datetime.utcnow()
         daily_users = await user_activity_collection.count_documents({"is_group": False, "last_activity": {"$gte": now - timedelta(days=1)}})
@@ -47,7 +46,6 @@ async def handle_callback_query(callback_query):
         back_button = [[Button.inline("⬅️ Back", b"fstats")]]
         await call.edit(stats_text, parse_mode='md', buttons=back_button)
         return
-
     if call.data == b"fstats":
         stats_dashboard_text = (
             "**🗒 Smart Tool Basic Statistics Menu 🔍**\n"
@@ -67,7 +65,6 @@ async def handle_callback_query(callback_query):
         ]
         await call.edit(stats_dashboard_text, parse_mode='md', buttons=stats_dashboard_buttons)
         return
-
     if call.data.startswith(b"top_users_"):
         page = int(call.data.decode().split("_")[-1])
         users_per_page = 9
@@ -110,7 +107,6 @@ async def handle_callback_query(callback_query):
         top_users_buttons = buttons
         await call.edit(top_users_text, parse_mode='md', buttons=top_users_buttons)
         return
-
     if call.data == b"server":
         ping_output = subprocess.getoutput("ping -c 1 google.com")
         ping = ping_output.split("time=")[1].split()[0] if "time=" in ping_output else "N/A"
@@ -149,7 +145,6 @@ async def handle_callback_query(callback_query):
         back_button = [[Button.inline("⬅️ Back", b"about_me")]]
         await call.edit(server_status_text, parse_mode='md', buttons=back_button)
         return
-
     if call.data.decode() in responses:
         if call.data == b"server":
             back_button = [[Button.inline("⬅️ Back", b"about_me")]]
@@ -171,7 +166,7 @@ async def handle_callback_query(callback_query):
         await call.edit(
             responses[call.data.decode()][0],
             parse_mode=responses[call.data.decode()][1]['parse_mode'],
-            link_preview=not responses[call.data.decode()][1]['disable_web_page_preview'],
+            link_preview=responses[call.data.decode()][1].get('link_preview', False),
             buttons=back_button
         )
     elif call.data.startswith(b"donate_") or call.data.startswith(b"increment_donate_") or call.data.startswith(b"decrement_donate_") or call.data == b"donate":

@@ -1,3 +1,5 @@
+#Copyright @ISmartCoder
+#Updates Channel t.me/TheSmartDev
 import os
 import aiohttp
 import asyncio
@@ -91,4 +93,5 @@ def setup_mbin_handler(app: TelegramClient):
         response_text = "🔍 **BIN Details 📋**\n━━━━━━━━━━━━━━━━━━\n" + "".join(results)
         
         await event.client.edit_message(fetching_message, response_text, parse_mode='md')
+
         LOGGER.info(f"BIN info sent to user: {user_id}")

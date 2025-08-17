@@ -19,6 +19,7 @@ from .cryptxutils.cryptdata import setup_binance_handler
 from .cryptxutils.cryptx import setup_coin_handler
 from .cryptxutils.p2p import setup_p2p_handler
 from .cryptxutils.token import setup_crypto_handler
+from .decxutils.dutilz import setup_decoders_handler
 
 def setup_modules_handlers(app):
     setup_ai_handler(app)
@@ -39,3 +40,4 @@ def setup_modules_handlers(app):
     setup_coin_handler(app)
     setup_p2p_handler(app)
     setup_crypto_handler(app)
+    setup_decoders_handler(app)

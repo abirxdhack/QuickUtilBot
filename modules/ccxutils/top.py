@@ -1,3 +1,5 @@
+#Copyright @ISmartCoder
+#Updates Channel t.me/TheSmartDev
 import os
 import time
 from collections import Counter
@@ -111,4 +113,5 @@ async def handle_topbin_command(event):
 def setup_topbin_handler(app: TelegramClient):
     @app.on(events.NewMessage(pattern=f'^{COMMAND_PREFIX}topbin'))
     async def topbin(event):
+
         await handle_topbin_command(event)

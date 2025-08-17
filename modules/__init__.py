@@ -26,6 +26,8 @@ from .hlpxutils.help import setup_help_handler
 from .hlpxutils.tpusers import setup_tp_handler
 from .privxutils.privacy import setup_privacy_handler
 from .infoxutils.info import setup_info_handler
+from .mailxutils.tmail import setup_tmail_handler
+from .mailxutils.fmail import setup_fmail_handlers
 
 def setup_modules_handlers(app):
     setup_ai_handler(app)
@@ -53,3 +55,5 @@ def setup_modules_handlers(app):
     setup_tp_handler(app)
     setup_privacy_handler(app)
     setup_info_handler(app)
+    setup_fmail_handlers(app)
+    setup_tmail_handler(app)

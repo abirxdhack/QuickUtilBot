@@ -1,3 +1,5 @@
+#Copyright @ISmartCoder
+#Updates Channel t.me/TheSmartDev
 import asyncio
 import re
 import os
@@ -171,4 +173,5 @@ async def handle_bin_commands(event):
 def setup_binf_handlers(app: TelegramClient):
     @app.on(events.NewMessage(pattern=f'^{COMMAND_PREFIX}(?:adbin|rmbin)(?:\\s+(.+))?'))
     async def bin_commands(event):
+
         await handle_bin_commands(event)

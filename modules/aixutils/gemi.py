@@ -1,3 +1,5 @@
+#Copyright @ISmartCoder
+#Updates Channel t.me/TheSmartDev
 import os
 import io
 from PIL import Image
@@ -98,4 +100,5 @@ def setup_gem_handler(app: TelegramClient):
         except Exception as e:
             LOGGER.error(f"Image analysis error: {str(e)}")
             await event.respond("**❌ Sorry Bro ImageAI Error**", parse_mode='md')
+
             await notify_admin(event.client, "/imgai", e, event)

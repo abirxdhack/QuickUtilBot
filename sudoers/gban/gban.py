@@ -1,3 +1,5 @@
+#Copyright @ISmartCoder
+#Updates Channel t.me/TheSmartDev
 import logging
 import traceback
 from datetime import datetime
@@ -300,3 +302,4 @@ def setup_gban_handler(app: TelegramClient):
                     parse_mode='markdown'
                 )
             logger.error(f"Error fetching banned users list: {e}\n{traceback.format_exc()}")
+

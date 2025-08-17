@@ -1,3 +1,5 @@
+#Copyright @ISmartCoder
+#Updates Channel t.me/TheSmartDev
 import aiohttp
 import asyncio
 import json
@@ -247,4 +249,5 @@ def setup_db_handlers(app: TelegramClient):
     
     @app.on(events.NewMessage(pattern=f'^{COMMAND_PREFIX}binbank(?:\\s+(.+))?'))
     async def binbank(event):
+
         await binbank_handler(event)

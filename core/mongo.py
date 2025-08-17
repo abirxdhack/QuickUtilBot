@@ -1,3 +1,5 @@
+#Copyright @ISmartCoder
+#Updates Channel t.me/TheSmartDev
 from motor.motor_asyncio import AsyncIOMotorClient
 from urllib.parse import urlparse, parse_qs
 from utils import LOGGER
@@ -21,3 +23,4 @@ try:
 except Exception as e:
     LOGGER.error(f"Failed to create MONGO_CLIENT: {e}")
     raise
+

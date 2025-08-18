@@ -40,6 +40,8 @@ from .toolxutils.getusr import setup_getusr_handler
 from .toolxutils.rs import setup_rs_handler
 from .toolxutils.vnote import setup_vnote_handler
 from .sessxutils.string import setup_string_handler
+from .webxutils.ws import setup_ws_handler
+from .webxutils.ss import setup_ss_handler
 
 
 def setup_modules_handlers(app):
@@ -82,3 +84,5 @@ def setup_modules_handlers(app):
     setup_rs_handler(app)
     setup_vnote_handler(app)
     setup_string_handler(app)
+    setup_ws_handler(app)
+    setup_ss_handler(app)

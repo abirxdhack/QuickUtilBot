@@ -42,6 +42,8 @@ from .toolxutils.vnote import setup_vnote_handler
 from .sessxutils.string import setup_string_handler
 from .webxutils.ws import setup_ws_handler
 from .webxutils.ss import setup_ss_handler
+from .audxutils.aud import setup_voice_handler
+from .audxutils.conv import setup_aud_handler
 
 
 def setup_modules_handlers(app):
@@ -86,3 +88,5 @@ def setup_modules_handlers(app):
     setup_string_handler(app)
     setup_ws_handler(app)
     setup_ss_handler(app)
+    setup_aud_handler(app)
+    setup_voice_handler(app)

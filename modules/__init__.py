@@ -39,6 +39,7 @@ from .toolxutils.fdl import setup_fdl_handler
 from .toolxutils.getusr import setup_getusr_handler
 from .toolxutils.rs import setup_rs_handler
 from .toolxutils.vnote import setup_vnote_handler
+from .sessxutils.string import setup_string_handler
 
 
 def setup_modules_handlers(app):
@@ -80,3 +81,4 @@ def setup_modules_handlers(app):
     setup_getusr_handler(app)
     setup_rs_handler(app)
     setup_vnote_handler(app)
+    setup_string_handler(app)

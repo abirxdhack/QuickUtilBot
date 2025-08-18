@@ -31,6 +31,15 @@ from .mailxutils.fmail import setup_fmail_handlers
 from .timexutils.time import setup_time_handler
 from .grpxutils.wlc import setup_wlc_handler
 from .txtutils.sptxt import setup_txt_handler
+from .ytxutils.yth import setup_yth_handler
+from .ytxutils.ytag import setup_ytag_handlers
+from .toolxutils.cpn import setup_cpn_handler
+from .toolxutils.enh import setup_enh_handler
+from .toolxutils.fdl import setup_fdl_handler
+from .toolxutils.getusr import setup_getusr_handler
+from .toolxutils.rs import setup_rs_handler
+from .toolxutils.vnote import setup_vnote_handler
+
 
 def setup_modules_handlers(app):
     setup_ai_handler(app)
@@ -63,3 +72,11 @@ def setup_modules_handlers(app):
     setup_time_handler(app)
     setup_wlc_handler(app)
     setup_txt_handler(app)
+    setup_yth_handler(app)
+    setup_ytag_handlers(app)
+    setup_cpn_handler(app)
+    setup_enh_handler(app)
+    setup_fdl_handler(app)
+    setup_getusr_handler(app)
+    setup_rs_handler(app)
+    setup_vnote_handler(app)

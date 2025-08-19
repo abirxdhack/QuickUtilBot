@@ -4,7 +4,7 @@ from misc import handle_callback_query
 from telethon import events
 from telethon.tl.types import UpdateShortMessage, UpdateNewMessage
 from utils import LOGGER, setup_nfy_handler
-from suoders import setup_sudoers_handlers
+from sudoers import setup_sudoers_handlers
 from modules import setup_modules_handlers
 from core import setup_start_handler, restart_messages
 from user import user 

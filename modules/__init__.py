@@ -57,6 +57,13 @@ from .eduxutils.spl import setup_spl_handler
 from .eduxutils.syn import setup_syn_handler
 from .eduxutils.tr import setup_tr_handler
 from .payxutils.pay import setup_donate_handler
+from .dlxutils.tik import setup_tt_handler
+from .dlxutils.yt import setup_yt_handler
+from .dlxutils.fb import setup_fb_handlers
+from .dlxutils.pnt import setup_pinterest_handler
+from .dlxutils.insta import setup_insta_handlers
+from .dlxutils.spfy import setup_spotify_handler
+from .dlxutils.tx import setup_tx_handler
 
 def setup_modules_handlers(app):
     setup_ai_handler(app)
@@ -115,3 +122,10 @@ def setup_modules_handlers(app):
     setup_syn_handler(app)
     setup_tr_handler(app)
     setup_donate_handler(app)
+    setup_tt_handler(app)
+    setup_yt_handler(app)
+    setup_fb_handlers(app)
+    setup_pinterest_handler(app)
+    setup_insta_handlers(app)
+    setup_spotify_handler(app)
+    setup_tx_handler(app)

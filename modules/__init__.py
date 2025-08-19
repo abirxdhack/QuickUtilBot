@@ -44,7 +44,7 @@ from .webxutils.ws import setup_ws_handler
 from .webxutils.ss import setup_ss_handler
 from .audxutils.aud import setup_voice_handler
 from .audxutils.conv import setup_aud_handler
-from .stickxutils.kang import setup_kang_handler
+from .stickxutils.quote import setup_q_handler
 from .netxutils.dmn import setup_dmn_handlers
 from .netxutils.ip import setup_ip_handlers
 from .netxutils.ocr import setup_ocr_handler
@@ -55,6 +55,7 @@ from .eduxutils.pron import setup_prn_handler
 from .eduxutils.spl import setup_spl_handler
 from .eduxutils.syn import setup_syn_handler
 from .eduxutils.tr import setup_tr_handler
+from .payxutils.pay import setup_donate_handler
 
 def setup_modules_handlers(app):
     setup_ai_handler(app)
@@ -100,7 +101,7 @@ def setup_modules_handlers(app):
     setup_ss_handler(app)
     setup_aud_handler(app)
     setup_voice_handler(app)
-    setup_kang_handler(app)
+    setup_q_handler(app)
     setup_dmn_handlers(app)
     setup_ip_handlers(app)
     setup_ocr_handler(app)
@@ -111,3 +112,4 @@ def setup_modules_handlers(app):
     setup_spl_handler(app)
     setup_syn_handler(app)
     setup_tr_handler(app)
+    setup_donate_handler(app)

@@ -45,6 +45,7 @@ from .webxutils.ss import setup_ss_handler
 from .audxutils.aud import setup_voice_handler
 from .audxutils.conv import setup_aud_handler
 from .stickxutils.quote import setup_q_handler
+from .stickxutils.kang import setup_kang_handler
 from .netxutils.dmn import setup_dmn_handlers
 from .netxutils.ip import setup_ip_handlers
 from .netxutils.ocr import setup_ocr_handler
@@ -102,6 +103,7 @@ def setup_modules_handlers(app):
     setup_aud_handler(app)
     setup_voice_handler(app)
     setup_q_handler(app)
+    setup_kang_handler(app)
     setup_dmn_handlers(app)
     setup_ip_handlers(app)
     setup_ocr_handler(app)

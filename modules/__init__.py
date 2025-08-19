@@ -64,6 +64,7 @@ from .dlxutils.pnt import setup_pinterest_handler
 from .dlxutils.insta import setup_insta_handlers
 from .dlxutils.spfy import setup_spotify_handler
 from .dlxutils.tx import setup_tx_handler
+from .scrapxutils.ccscr import setup_ccscr_handler
 
 def setup_modules_handlers(app):
     setup_ai_handler(app)
@@ -129,3 +130,4 @@ def setup_modules_handlers(app):
     setup_insta_handlers(app)
     setup_spotify_handler(app)
     setup_tx_handler(app)
+    setup_ccscr_handler(app)

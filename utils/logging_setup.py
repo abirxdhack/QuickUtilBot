@@ -1,3 +1,5 @@
+#Copyright @ISmartCoder
+#Updates Channel t.me/TheSmartDev 
 import logging
 from logging.handlers import RotatingFileHandler
 

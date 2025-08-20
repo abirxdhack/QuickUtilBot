@@ -3,7 +3,7 @@ import uuid
 import hashlib
 import time
 from telethon import TelegramClient, events
-from telethon.tl.types import InputPeerUser, InputPeerChat, InputPeerChannel, KeyboardButtonBuy, ReplyInlineMarkup, KeyboardButtonRow, InputKeyboardButtonUserProfile, InputMediaInvoice, LabeledPrice, Invoice, DataJSON
+from telethon.tl.types import InputPeerUser, InputPeerChat, InputPeerChannel, KeyboardButtonBuy, ReplyInlineMarkup, KeyboardButtonRow, InputKeyboardButtonUserProfile, InputMediaInvoice, LabeledPrice, Invoice, DataJSON, KeyboardButtonCopy
 from telethon.tl.custom import Button
 from telethon.utils import get_display_name
 from config import OWNER_ID, DEVELOPER_USER_ID
@@ -100,7 +100,8 @@ async def generate_invoice(client: TelegramClient, chat_id: int, user_id: int, q
             invoice=invoice,
             payload=invoice_payload.encode(),
             provider="",
-            provider_data=DataJSON(data="{}")
+            provider_data=DataJSON(data="{}"),
+            start_param="Basic"
         )
        
         await client.send_message(
@@ -246,7 +247,11 @@ async def raw_update_handler(client: TelegramClient, update, entities):
                 'charge_id': payment.charge.id
             }
            
-            success_message = [[Button.inline("Transaction ID", copy_text=payment.charge.id)]]
+            success_message = ReplyInlineMarkup([
+                KeyboardButtonRow([
+                    KeyboardButtonCopy("Transaction ID", payment.charge.id)
+                ])
+            ])
             await client.send_message(chat_id, PAYMENT_SUCCESS_TEXT.format(full_name, payment.total_amount, payment.charge.id), parse_mode='md', buttons=success_message)
            
             admin_text = ADMIN_NOTIFICATION_TEXT.format(full_name, user_id, username, payment.total_amount, payment.charge.id)

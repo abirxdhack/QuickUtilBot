@@ -1,5 +1,3 @@
-#Copyright @ISmartCoder
-#Updates Channel t.me/TheSmartDev
 import asyncio
 from datetime import datetime, timedelta
 from telethon import TelegramClient, events, Button
@@ -76,7 +74,7 @@ def get_command_from_text(text: str) -> tuple:
         return None, []
     
     command = parts[0]
-    for prefix in COMMAND_PREFIX + [""]:
+    for prefix in COMMAND_PREFIX:
         if command.startswith(prefix):
             command = command[len(prefix):]
             break
@@ -100,44 +98,32 @@ async def broadcast_handler(event) -> None:
         return
 
     command, args = get_command_from_text(event.raw_text)
-    is_broadcast = command in ["broadcast", "b"]
+    if not command or command not in ["broadcast", "send"]:
+        return
+
+    has_valid_prefix = False
+    for prefix in COMMAND_PREFIX:
+        if event.raw_text.startswith(prefix + command):
+            has_valid_prefix = True
+            break
+    
+    if not has_valid_prefix:
+        return
+
+    if not event.is_reply:
+        await event.respond("**Please reply to a message to broadcast/send it.**", parse_mode='md')
+        return
+
+    reply_msg = await event.get_reply_message()
+    if not (reply_msg.text or reply_msg.photo or reply_msg.video or 
+            reply_msg.audio or reply_msg.document):
+        await event.respond("**Please reply to a valid message (text, photo, video, audio, or document).**", parse_mode='md')
+        return
+
+    is_broadcast = command == "broadcast"
     LOGGER.info(f"{'Broadcast' if is_broadcast else 'Send'} initiated by user_id {user_id}")
 
-    if event.is_reply:
-        reply_msg = await event.get_reply_message()
-        if (reply_msg.text or reply_msg.photo or reply_msg.video or 
-            reply_msg.audio or reply_msg.document):
-            await process_broadcast(event.client, reply_msg, is_broadcast, event.chat_id)
-    elif is_broadcast and args:
-        await process_broadcast(event.client, " ".join(args), is_broadcast, event.chat_id)
-    else:
-        action = "broadcast" if is_broadcast else "send"
-        await event.respond(f"**Please send a message to {action}.**", parse_mode='md')
-        
-        waiting_for_callback = True
-        
-        async def callback(callback_event):
-            nonlocal waiting_for_callback
-            if (callback_event.sender_id == user_id and 
-                callback_event.chat_id == event.chat_id and
-                waiting_for_callback):
-                waiting_for_callback = False
-                if not (callback_event.text or callback_event.photo or 
-                       callback_event.video or callback_event.audio or 
-                       callback_event.document):
-                    await callback_event.respond(
-                        "**Send a valid text, photo, video, audio, or document ❌**",
-                        parse_mode='md'
-                    )
-                    waiting_for_callback = True
-                    return
-                await process_broadcast(event.client, callback_event, is_broadcast, callback_event.chat_id)
-                event.client.remove_event_handler(callback)
-        
-        event.client.add_event_handler(
-            callback,
-            events.NewMessage(chats=event.chat_id, from_users=user_id)
-        )
+    await process_broadcast(event.client, reply_msg, is_broadcast, event.chat_id)
 
 async def process_broadcast(client: TelegramClient, content, is_broadcast: bool = True, chat_id: int = None) -> None:
     try:
@@ -210,7 +196,7 @@ async def process_broadcast(client: TelegramClient, content, is_broadcast: bool 
                             )
                     else:
                         sent_msg = await client.forward_messages(
-                            target_chat_id, broadcast_msg
+                            target_chat_id, broadcast_msg.id, from_peer=broadcast_msg.peer_id
                         )
                 
                 if sent_msg and target_chat_id in group_ids:
@@ -387,13 +373,20 @@ async def update_user_activity_handler(event) -> None:
         LOGGER.error(f"Error in update_user_activity_handler for message_id {getattr(event, 'id', 'unknown')}: {str(e)}")
 
 def create_command_pattern(commands: list) -> str:
-    escaped_prefixes = [prefix.replace("|", r"\|").replace(".", r"\.").replace("(", r"\(").replace(")", r"\)").replace("[", r"\[").replace("]", r"\]").replace("*", r"\*").replace("+", r"\+").replace("?", r"\?").replace("^", r"\^").replace("$", r"\$").replace("{", r"\{").replace("}", r"\}") for prefix in COMMAND_PREFIX]
-    prefix_pattern = "[" + "".join(escaped_prefixes) + "]"
-    command_pattern = "|".join(commands)
-    return f"^{prefix_pattern}?({command_pattern})(\\s|$)"
+    escaped_prefixes = []
+    for prefix in COMMAND_PREFIX:
+        escaped = prefix
+        special_chars = r'\.^$*+?{}[]|()'
+        for char in special_chars:
+            escaped = escaped.replace(char, '\\' + char)
+        escaped_prefixes.append(escaped)
+    
+    prefix_pattern = "(" + "|".join(escaped_prefixes) + ")"
+    command_pattern = "(" + "|".join(commands) + ")"
+    return f"^{prefix_pattern}{command_pattern}(\\s|$)"
 
 def setup_admin_handler(app: TelegramClient) -> None:
-    broadcast_pattern = create_command_pattern(["broadcast", "b", "send", "s"])
+    broadcast_pattern = create_command_pattern(["broadcast", "send"])
     stats_pattern = create_command_pattern(["stats", "report", "status"])
     
     @app.on(events.NewMessage(pattern=broadcast_pattern, func=lambda e: e.is_private or e.is_group))
@@ -414,4 +407,3 @@ def setup_admin_handler(app: TelegramClient) -> None:
             await group_added_handler(event)
         elif event.user_kicked or event.user_left:
             await group_removed_handler(event)
-    

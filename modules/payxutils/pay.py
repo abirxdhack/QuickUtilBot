@@ -115,7 +115,8 @@ def setup_donate_handler(app):
                     description=description,
                     invoice=invoice,
                     payload=invoice_payload,
-                    provider_data=types.DataJSON(data="{}")
+                    provider_data=types.DataJSON(data="{}"),
+                    start_param="Basic"
                 ),
                 buttons=reply_markup
             )

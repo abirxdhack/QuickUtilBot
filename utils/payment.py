@@ -136,7 +136,7 @@ async def generate_invoice(client: TelegramClient, chat_id: int, user_id: int, q
             payload=invoice_payload.encode(),
             provider="",
             provider_data=DataJSON(data="{}"),
-            start_param="Basic"
+            start_param="donate-stars-to-quickutil"
         )
        
         await client.send_message(

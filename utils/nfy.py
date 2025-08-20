@@ -1,3 +1,5 @@
+#Copyright @ISmartCoder
+#Updates Channel t.me/TheSmartDev 
 import traceback
 from datetime import datetime
 from typing import Optional, Union

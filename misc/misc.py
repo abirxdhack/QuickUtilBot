@@ -34,7 +34,7 @@ async def handle_callback_query(callback_query):
         total_users = await user_activity_collection.count_documents({"is_group": False})
         total_groups = await user_activity_collection.count_documents({"is_group": True})
         stats_text = (
-            f"**Smart Bot Status ⇾ Report ✅**\n"
+            f"**Quick Util Bot Status ⇾ Report ✅**\n"
             f"**━━━━━━━━━━━━━━━━**\n"
             f"**Users & Groups Engagements:**\n"
             f"**1 Day:** {daily_users} users were active\n"
@@ -50,7 +50,7 @@ async def handle_callback_query(callback_query):
         return
     if call.data == b"fstats":
         stats_dashboard_text = (
-            "**🗒 Smart Tool Basic Statistics Menu 🔍**\n"
+            "**🗒 Qucik Util Basic Statistics Menu 🔍**\n"
             "**━━━━━━━━━━━━━━━━━**\n"
             "Stay Updated With Real Time Insights....⚡️\n"
             "⊗ **Full Statistics:** Get Full Statistics Of Smart Tool ⚙️\n"
@@ -125,7 +125,7 @@ async def handle_callback_query(callback_query):
         used_mem = mem.used / (2**30)
         available_mem = mem.available / (2**30)
         server_status_text = (
-            f"**Smart Bot Status ⇾ Report ✅**\n"
+            f"**Quick Util Bot Status ⇾ Report ✅**\n"
             f"**━━━━━━━━━━━━━**\n"
             f"**Server Connection:**\n"
             f"**- Ping:** {ping} ms\n"
@@ -174,15 +174,15 @@ async def handle_callback_query(callback_query):
     elif call.data.startswith(b"donate_") or call.data.startswith(b"increment_donate_") or call.data.startswith(b"decrement_donate_") or call.data == b"donate":
         await handle_donate_callback(call.client, call)
     elif call.data == b"main_menu":
-        await call.edit("<b>Here are the Smart-Tool Options: 👇</b>", parse_mode='html', buttons=main_menu_keyboard)
+        await call.edit("<b>Here are the Quick-Util Options: 👇</b>", parse_mode='html', buttons=main_menu_keyboard)
     elif call.data == b"next_1":
-        await call.edit("<b>Here are the Smart-Tool Options: 👇</b>", parse_mode='html', buttons=second_menu_keyboard)
+        await call.edit("<b>Here are the Quick-Util Options: 👇</b>", parse_mode='html', buttons=second_menu_keyboard)
     elif call.data == b"next_2":
-        await call.edit("<b>Here are the Smart-Tool Options: 👇</b>", parse_mode='html', buttons=third_menu_keyboard)
+        await call.edit("<b>Here are the Quick-Util Options: 👇</b>", parse_mode='html', buttons=third_menu_keyboard)
     elif call.data == b"previous_1":
-        await call.edit("<b>Here are the Smart-Tool Options: 👇</b>", parse_mode='html', buttons=main_menu_keyboard)
+        await call.edit("<b>Here are the Quick-Util Options: 👇</b>", parse_mode='html', buttons=main_menu_keyboard)
     elif call.data == b"previous_2":
-        await call.edit("<b>Here are the Smart-Tool Options: 👇</b>", parse_mode='html', buttons=second_menu_keyboard)
+        await call.edit("<b>Here are the Quick-Util Options: 👇</b>", parse_mode='html', buttons=second_menu_keyboard)
     elif call.data == b"close":
         await call.delete()
     elif call.data == b"start_message":
@@ -190,7 +190,7 @@ async def handle_callback_query(callback_query):
         start_message = (
             f"<b>Hi {full_name}! Welcome To This Bot</b>\n"
             f"<b>━━━━━━━━━━━━━━━━━━━━━━</b>\n"
-            f"<b>Smart Tool</b> The ultimate toolkit on Telegram, offering education, AI, downloaders, temp mail, credit card tool, and more. Simplify your tasks with ease!\n"
+            f"<b>Quick Util</b> The ultimate toolkit on Telegram, offering education, AI, downloaders, temp mail, credit card tool, and more. Simplify your tasks with ease!\n"
             f"<b>━━━━━━━━━━━━━━━━━━━━━━</b>\n"
             f"<b>Don't Forget To <a href='{UPDATE_CHANNEL_URL}'>Join Here</a> For Updates!</b>"
         )
@@ -206,7 +206,7 @@ async def handle_callback_query(callback_query):
     elif call.data == b"policy_terms":
         policy_terms_text = (
             f"<b>📜 Policy & Terms Menu</b>\n\n"
-            f"At <b>Smart Tool ⚙️</b>, we prioritize your privacy and security. To ensure a seamless and safe experience, we encourage you to review our <b>Privacy Policy</b> and <b>Terms & Conditions</b>.\n\n"
+            f"At <b>Quick Util ⚙️</b>, we prioritize your privacy and security. To ensure a seamless and safe experience, we encourage you to review our <b>Privacy Policy</b> and <b>Terms & Conditions</b>.\n\n"
             f"🔹 <b>Privacy Policy</b>: Learn how we collect, use, and protect your personal data.\n"
             f"🔹 <b>Terms & Conditions</b>: Understand the rules and guidelines for using our services.\n\n"
             f"<b>💡 Choose an option below to proceed:</b>"
@@ -218,27 +218,27 @@ async def handle_callback_query(callback_query):
         await call.edit(policy_terms_text, parse_mode='html', buttons=policy_terms_button)
     elif call.data == b"privacy_policy":
         privacy_policy_text = (
-            f"<b>📜 Privacy Policy for Smart Tool ⚙️</b>\n\n"
-            f"Welcome to <b>Smart Tool ⚙️</b> Bot. By using our services, you agree to this privacy policy.\n\n"
+            f"<b>📜 Privacy Policy for Quick Util ⚙️</b>\n\n"
+            f"Welcome to <b>Quick Util ⚙️</b> Bot. By using our services, you agree to this privacy policy.\n\n"
             f"1. <b>Personal Information</b>:\n"
             f" - Personal Information: User ID and username for personalization.\n"
             f" - <b>Usage Data</b>: Information on how you use the app to improve our services.\n\n"
             f"2. Usage of Information:\n"
-            f" - <b>Service Enhancement</b>: To provide and improve <b>Smart Tool ⚙️</b>\n"
+            f" - <b>Service Enhancement</b>: To provide and improve <b>Quick Util ⚙️</b>\n"
             f" - <b>Communication</b>: Updates and new features.\n"
             f" - <b>Security</b>: To prevent unauthorized access.\n"
             f" - <b>Advertisements</b>: Display of promotions.\n\n"
             f"3. Data Security:\n"
             f" - These tools do not store any data, ensuring your privacy.\n"
             f" - We use strong security measures, although no system is 100% secure.\n\n"
-            f"Thank you for using <b>Smart Tool ⚙️</b>. We prioritize your privacy and security."
+            f"Thank you for using <b>Quick Util ⚙️</b>. We prioritize your privacy and security."
         )
         back_button = [[Button.inline("⬅️ Back", b"policy_terms")]]
         await call.edit(privacy_policy_text, parse_mode='html', buttons=back_button)
     elif call.data == b"terms_conditions":
         terms_conditions_text = (
-            f"<b>📜 Terms & Conditions for Smart Tool ⚙️</b>\n\n"
-            f"Welcome to <b>Smart Tool ⚙️</b>. By using our services, you accept these <b>Terms & Conditions</b>.\n\n"
+            f"<b>📜 Terms & Conditions for Quick Util ⚙️</b>\n\n"
+            f"Welcome to <b>Quick Util ⚙️</b>. By using our services, you accept these <b>Terms & Conditions</b>.\n\n"
             f"<b>1. Usage Guidelines</b>\n"
             f" - Eligibility: Must be 13 years of age or older.\n\n"
             f"<b>2. Prohibited</b>\n"
@@ -259,11 +259,11 @@ async def handle_callback_query(callback_query):
             f" - Access may be terminated for any violations without prior notice.\n\n"
             f"<b>7. Contact Information</b>\n"
             f" - Contact My Dev for any inquiries or concerns. <a href='tg://user?id=7303810912'>Abir Arafat Chawdhury👨‍💻</a> \n\n"
-            f"Thank you for using <b>Smart Tool ⚙️</b>. We prioritize your safety, security, and best user experience. 🚀"
+            f"Thank you for using <b>Quick Util ⚙️</b>. We prioritize your safety, security, and best user experience. 🚀"
         )
         back_button = [[Button.inline("⬅️ Back", b"policy_terms")]]
         await call.edit(terms_conditions_text, parse_mode='html', buttons=back_button)
     elif call.data == b"second_menu":
-        await call.edit("<b>Here are the Smart-Tool Options: 👇</b>", parse_mode='html', buttons=second_menu_keyboard)
+        await call.edit("<b>Here are the Quick-Util Options: 👇</b>", parse_mode='html', buttons=second_menu_keyboard)
     elif call.data == b"third_menu":
-        await call.edit("<b>Here are the Smart-Tool Options: 👇</b>", parse_mode='html', buttons=third_menu_keyboard)
+        await call.edit("<b>Here are the Quick-Util Options: 👇</b>", parse_mode='html', buttons=third_menu_keyboard)

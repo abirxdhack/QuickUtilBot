@@ -36,6 +36,7 @@ from .ytxutils.ytag import setup_ytag_handlers
 from .toolxutils.cpn import setup_cpn_handler
 from .toolxutils.enh import setup_enh_handler
 from .toolxutils.fdl import setup_fdl_handler
+from .toolxutils.rembg import setup_bg_handler
 from .toolxutils.getusr import setup_getusr_handler
 from .toolxutils.rs import setup_rs_handler
 from .toolxutils.vnote import setup_vnote_handler
@@ -102,6 +103,7 @@ def setup_modules_handlers(app):
     setup_ytag_handlers(app)
     setup_cpn_handler(app)
     setup_enh_handler(app)
+    setup_bg_handler(app)
     setup_fdl_handler(app)
     setup_getusr_handler(app)
     setup_rs_handler(app)

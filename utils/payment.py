@@ -33,10 +33,10 @@ from config import OWNER_ID, DEVELOPER_USER_ID
 logger = logging.getLogger(__name__)
 
 DONATION_OPTIONS_TEXT = """
-**Why support Smart Tools?**
+**Why support Quick Util?**
 **━━━━━━━━━━━━━━━━━━**
 🌟 **Love the service?**
-Your support helps keep **SmartTools** fast, reliable, and free for everyone.
+Your support helps keep **QuickUtil** fast, reliable, and free for everyone.
 Even a small **Gift or Donation** makes a big difference! 💖
 
 👇 **Choose an amount to contribute:**
@@ -46,14 +46,14 @@ More support = more motivation
 More motivation = better tools
 Better tools = more productivity
 More productivity = less wasted time
-Less wasted time = more done with **Smart Tools** 💡
+Less wasted time = more done with **Quick Util** 💡
 **More Muhahaha… 🤓🔥**
 """
 
 PAYMENT_SUCCESS_TEXT = """
 **✅ Donation Successful!**
 
-🎉 Huge thanks **{0}** for donating **{1}** ⭐️ to support **Smart Tool!**
+🎉 Huge thanks **{0}** for donating **{1}** ⭐️ to support **Quick Util!**
 Your contribution helps keep everything running smooth and awesome 🚀
 
 **🧾 Transaction ID:** `{2}`
@@ -115,7 +115,7 @@ async def generate_invoice(client: TelegramClient, chat_id: int, user_id: int, q
         timestamp = int(time.time())
         unique_id = str(uuid.uuid4())[:8]
         invoice_payload = f"contribution_{user_id}_{quantity}_{timestamp}_{unique_id}"
-        title = "Support Smart Tools"
+        title = "Support QuickUtil"
         description = f"Contribute {quantity} Stars to support ongoing development and keep the tools free, fast, and reliable for everyone 💫 Every star helps us grow!"
         currency = "XTR"
         reply_markup = [[KeyboardButtonBuy(text="💫 Donate Via Stars")]]

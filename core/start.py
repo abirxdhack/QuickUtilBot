@@ -16,10 +16,10 @@ def setup_start_handler(app: TelegramClient):
             return
         
         chat_id = event.chat_id
-        animation_message = await event.respond("<b>Starting Smart Tool ⚙️...</b>", parse_mode='html')
-        await asyncio.sleep(0.4)
+        animation_message = await event.respond("<b>Starting Quick Util ⚙️...</b>", parse_mode='html')
+        await asyncio.sleep(0.3)
         await app.edit_message(chat_id, animation_message, "<b>Generating Session Keys Please Wait...</b>", parse_mode='html')
-        await asyncio.sleep(0.4)
+        await asyncio.sleep(0.3)
         await app.delete_messages(chat_id, animation_message)
         
         full_name = "User"
@@ -33,7 +33,7 @@ def setup_start_handler(app: TelegramClient):
             response_text = (
                 f"<b>Hi {full_name}! Welcome To This Bot</b>\n"
                 "<b>━━━━━━━━━━━━━━━━━━━━━━</b>\n"
-                f"<b>Smart Tool</b> The ultimate toolkit on Telegram, offering education, AI, downloaders, temp mail, credit cards, and more. Simplify your tasks with ease!\n"
+                f"<b>Quick Util</b> The ultimate toolkit on Telegram, offering education, AI, downloaders, temp mail, credit cards, and more. Simplify your tasks with ease!\n"
                 "<b>━━━━━━━━━━━━━━━━━━━━━━</b>\n"
                 f"<b>Don't forget to <a href='{UPDATE_CHANNEL_URL}'>Join Here</a> for updates!</b>"
             )
@@ -45,7 +45,7 @@ def setup_start_handler(app: TelegramClient):
                 response_text = (
                     f"<b>Hi {full_name}! Welcome To This Bot</b>\n"
                     "<b>━━━━━━━━━━━━━━━━━━━━━━</b>\n"
-                    f"<b>Smart Tool</b> The ultimate toolkit on Telegram, offering education, AI, downloaders, temp mail, credit cards, and more. Simplify your tasks with ease!\n"
+                    f"<b>Quick Util</b> The ultimate toolkit on Telegram, offering education, AI, downloaders, temp mail, credit cards, and more. Simplify your tasks with ease!\n"
                     "<b>━━━━━━━━━━━━━━━━━━━━━━</b>\n"
                     f"<b>Don't forget to <a href='{UPDATE_CHANNEL_URL}'>Join Here</a> for updates!</b>"
                 )
@@ -53,7 +53,7 @@ def setup_start_handler(app: TelegramClient):
                 response_text = (
                     f"<b>Hi! Welcome {group_name} To This Bot</b>\n"
                     "<b>━━━━━━━━━━━━━━━━━━━━━━━━━━</b>\n"
-                    f"<b>Smart Tool</b> The ultimate toolkit on Telegram, offering education, AI, downloaders, temp mail, credit cards, and more. Simplify your tasks with ease!\n"
+                    f"<b>Quick Util</b> The ultimate toolkit on Telegram, offering education, AI, downloaders, temp mail, credit cards, and more. Simplify your tasks with ease!\n"
                     "<b>━━━━━━━━━━━━━━━━━━━━━━━━━━</b>\n"
                     f"<b>Don't forget to <a href='{UPDATE_CHANNEL_URL}'>Join Here</a> for updates!</b>"
                 )
@@ -61,7 +61,7 @@ def setup_start_handler(app: TelegramClient):
             response_text = (
                 f"<b>Hi {full_name}! Welcome To This Bot</b>\n"
                 "<b>━━━━━━━━━━━━━━━━━━━━━━</b>\n"
-                "<b>Smart Tool</b> The ultimate toolkit on Telegram, offering education, AI, downloaders, temp mail, credit cards, and more. Simplify your tasks with ease!\n"
+                "<b>Quick Util</b> The ultimate toolkit on Telegram, offering education, AI, downloaders, temp mail, credit cards, and more. Simplify your tasks with ease!\n"
                 "<b>━━━━━━━━━━━━━━━━━━━━━━</b>\n"
                 f"<b>Don't forget to <a href='{UPDATE_CHANNEL_URL}'>Join Here</a> for updates!</b>"
             )
@@ -76,3 +76,4 @@ def setup_start_handler(app: TelegramClient):
             link_preview=False
 
         )
+

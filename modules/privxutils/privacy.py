@@ -7,9 +7,9 @@ from utils import LOGGER
 from core import banned_users
 
 PRIVACY_POLICY = """
-<b>📜 Privacy Policy for SmartToolsBot 💥</b>
+<b>📜 Privacy Policy for Quick Util </b>
 ━━━━━━━━━━━━━━━━━
-Welcome to SmartToolsBot 💥. By using our services, you agree to this privacy policy.
+Welcome to Quick Util 💥. By using our services, you agree to this privacy policy.
 <b>1. Information We Collect:</b>
    - <b>Personal Information:</b> User ID and username for personalization.
    - <b>Usage Data:</b> Information on how you use the app to improve our services.
@@ -21,7 +21,7 @@ Welcome to SmartToolsBot 💥. By using our services, you agree to this privacy 
 <b>3. Data Security:</b>
    - These tools do not store any data, ensuring your privacy.
    - We use strong security measures, although no system is 100% secure.
-Thank you for using SmartToolsBot 💥. We prioritize your privacy and security.
+Thank you for using Quick Util. We prioritize your privacy and security.
 """
 
 def setup_privacy_handler(app: TelegramClient):
@@ -43,4 +43,5 @@ def setup_privacy_handler(app: TelegramClient):
 
     @app.on(events.CallbackQuery(pattern=r'^close_privacy_policy$'))
     async def close_privacy_policy(event):
+
         await event.delete()

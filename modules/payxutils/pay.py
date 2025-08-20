@@ -135,7 +135,7 @@ def setup_donate_handler(app):
                     invoice=invoice,
                     payload=invoice_payload,
                     provider_data=types.DataJSON(data="{}"),
-                    start_param="Basic"
+                    start_param="donate-stars-to-quickutil"
                 ),
                 buttons=reply_markup
             )
@@ -446,3 +446,4 @@ def setup_donate_handler(app):
                         )
                     except Exception as failure_notify_error:
                         logger.error(f"❌ Failed to send payment failure notification: {str(failure_notify_error)}")
+

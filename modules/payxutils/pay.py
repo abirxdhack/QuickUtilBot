@@ -32,10 +32,10 @@ from core import banned_users
 logger = LOGGER
 
 DONATION_OPTIONS_TEXT = """
-**Why support Smart Tools?**
+**Why support QuickUtil?**
 **━━━━━━━━━━━━━━━━━━**
 🌟 **Love the service?**
-Your support helps keep **SmartTools** fast, reliable, and free for everyone.
+Your support helps keep **QuickUtil** fast, reliable, and free for everyone.
 Even a small **Gift or Donation** makes a big difference! 💖
 
 👇 **Choose an amount to contribute:**
@@ -45,14 +45,14 @@ More support = more motivation
 More motivation = better tools
 Better tools = more productivity
 More productivity = less wasted time
-Less wasted time = more done with **Smart Tools** 💡
+Less wasted time = more done with **Quick Util** 💡
 **More Muhahaha… 🤓🔥**
 """
 
 PAYMENT_SUCCESS_TEXT = """
 **✅ Donation Successful!**
 
-🎉 Huge thanks **{0}** for donating **{1}** ⭐️ to support **Smart Tool!**
+🎉 Huge thanks **{0}** for donating **{1}** ⭐️ to support **Quick Util!**
 Your contribution helps keep everything running smooth and awesome 🚀
 
 **🧾 Transaction ID:** `{2}`
@@ -113,7 +113,7 @@ def setup_donate_handler(app):
             timestamp = int(time.time())
             unique_id = str(uuid.uuid4())[:8]
             invoice_payload = f"contribution_{user_id}_{amount}_{timestamp}_{unique_id}".encode()
-            title = "Support Smart Tools"
+            title = "Support QuickUtil"
             description = f"Contribute {amount} Stars to support ongoing development and keep the tools free, fast, and reliable for everyone 💫 Every star helps us grow!"
             currency = "XTR"
            
@@ -446,4 +446,5 @@ def setup_donate_handler(app):
                         )
                     except Exception as failure_notify_error:
                         logger.error(f"❌ Failed to send payment failure notification: {str(failure_notify_error)}")
+
 

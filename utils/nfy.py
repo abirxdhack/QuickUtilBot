@@ -94,7 +94,7 @@ async def notify_admin(client: TelegramClient, command: str, error: Union[Except
         }
         
         error_report = (
-            "<b>🚨 Smart Tools New Bug Report</b>\n"
+            "<b>🚨 Quick Util New Bug Report</b>\n"
             "<b>━━━━━━━━━━━━━━━━</b>\n"
             f"<b>🧩 Command:</b> {command}\n"
             f"<b>👤 User:</b> <a href='tg://user?id={user_info['id']}'>{user_info['full_name']}</a>\n"
@@ -126,7 +126,7 @@ async def notify_admin(client: TelegramClient, command: str, error: Union[Except
         
         if is_member and channel_id:
             minimal_report = (
-                "<b>🚨 Smart Tools New Bug Report</b>\n"
+                "<b>🚨 Quick Util New Bug Report</b>\n"
                 "<b>━━━━━━━━━━━━━━━━</b>\n"
                 f"<b>🧩 Command:</b> {command}\n"
                 f"<b>👤 User:</b> <a href='tg://user?id={user_info['id']}'>{user_info['full_name']}</a>\n"
@@ -175,7 +175,7 @@ def setup_nfy_handler(app: TelegramClient):
             traceback_escaped = traceback_text.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
             issue_escaped = data['error_message'][:200].replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
             traceback_message = (
-                "<b>📄 Full Traceback — Smart Tools</b>\n"
+                "<b>📄 Full Traceback — Smart Quick Util</b>\n"
                 "<b>━━━━━━━━━━━━━━━━</b>\n"
                 f"<b>🧩 Command:</b> {data['command']}\n"
                 f"<b>⚠️ Error Type:</b> {data['error_type']}\n"
@@ -215,7 +215,7 @@ def setup_nfy_handler(app: TelegramClient):
             
             data = TRACEBACK_DATA[error_id]
             error_report = (
-                "<b>🚨 Smart Tools New Bug Report</b>\n"
+                "<b>🚨 Quick Util New Bug Report</b>\n"
                 "<b>━━━━━━━━━━━━━━━━━━━━━━</b>\n"
                 f"<b>🧩 Command:</b> {data['command']}\n"
                 f"<b>👤 User:</b> <a href='tg://user?id={data['user_info']['id']}'>{data['user_info']['full_name']}</a>\n"

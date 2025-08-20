@@ -1,3 +1,5 @@
+#Copyright @ISmartCoder
+#Updates Channel t.me/TheSmartDev 
 def get_dc_locations():
     """Returns a dictionary mapping Data Center IDs to their locations"""
     return {

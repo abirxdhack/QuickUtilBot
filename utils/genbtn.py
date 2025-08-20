@@ -1,3 +1,5 @@
+#Copyright @ISmartCoder
+#Updates Channel t.me/TheSmartDev 
 from telethon.tl.custom import Button
 from config import UPDATE_CHANNEL_URL
 main_menu_keyboard = [
@@ -524,19 +526,18 @@ responses = {
         {'parse_mode': 'html', 'link_preview': False}
     ),
     "about_me": (
-        "<b>Name:</b> Smart Tool\n"
-        "<b>Version:</b> v26.0 (Beta) 🛠\n\n"
+        "<b>Name:</b> Quick Util\n"
+        "<b>Version:</b> v28.0 (Beta) 🛠\n\n"
         "<b>Development Team:</b>\n"
         "- <b>Creator:</b> <a href='https://t.me/ISmartCoder'>Abir Arafat Chawdhury 👨‍💻</a>\n"
         "- <b>Contributor:</b> <a href='https://t.me/nkka404'>Nyein Ko Ko Aung 🤝</a>\n"
         "- <b>Helper:</b> <a href='https://t.me/NeoFrd'>Rahat Hossain 👥</a>\n"
         "<b>Technical Stacks:</b>\n"
         "- <b>Language:</b> Python 🐍\n"
-        "- <b>Framework:</b> Fully Written In Telethon 📚\n"
+        "- <b>Libraries:</b> Telethon & Pyrofork 📚\n"
         "- <b>Database:</b> MongoDB Database 🗄\n"
         "- <b>Hosting:</b> Digital Ocean VPS 🌐\n\n"
-        "<b>About:</b> The all-in-one Telegram toolkit for seamless education, AI, downloads, and more!\n\n"
-        "<b>🔔 For Bot Update News</b>: <a href='{}'>Join Now</a>".format(UPDATE_CHANNEL_URL),
+        "<b>About:</b> The all-in-one Telegram toolkit for seamless education, AI, downloads, and more!\n\n",
         {'parse_mode': 'html', 'link_preview': False}
     ),
     "text_split": (

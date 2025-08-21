@@ -1,3 +1,5 @@
+#Copyright @ISmartCoder
+#Updates Channel t.me/TheSmartDev 
 import asyncio
 from datetime import datetime, timedelta
 from telethon import TelegramClient, events, Button
